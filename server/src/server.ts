@@ -18,17 +18,20 @@ import { createCommentRoute } from './routes/comments/create-comment-route'
 import { getCommentRoute } from './routes/comments/get-comment-route'
 import { deleteCommentRoute } from './routes/comments/delete-comment-route'
 import { updateCommentRoute } from './routes/comments/update-comment-route'
+import mercurius from 'mercurius'
+import { GraphQLSchema } from './graphql/schema/schema'
+import { GraphQLResolvers } from './graphql/resolvers/resolvers'
 
-const app = fastify({ logger: true }).withTypeProvider<ZodTypeProvider>()
+const restApp = fastify({ logger: true }).withTypeProvider<ZodTypeProvider>()
 
-app.register(fastifyCors, {
+restApp.register(fastifyCors, {
   origin: '*'
 })
 
-app.setValidatorCompiler(validatorCompiler)
-app.setSerializerCompiler(serializerCompiler)
+restApp.setValidatorCompiler(validatorCompiler)
+restApp.setSerializerCompiler(serializerCompiler)
 
-app.register(fastifySwagger, {
+restApp.register(fastifySwagger, {
   openapi: {
     info: {
       title: 'api-communication-server',
@@ -38,28 +41,39 @@ app.register(fastifySwagger, {
   transform: jsonSchemaTransform
 })
 
-app.register(fastifySwaggerUi, {
+restApp.register(fastifySwaggerUi, {
   routePrefix: '/docs'
 })
 
-app.register(createPostRoute)
-app.register(getPostRoute)
-app.register(deletePostRoute)
-app.register(updatePostRoute)
+restApp.register(createPostRoute)
+restApp.register(getPostRoute)
+restApp.register(deletePostRoute)
+restApp.register(updatePostRoute)
 
-app.register(createCommentRoute)
-app.register(getCommentRoute)
-app.register(deleteCommentRoute)
-app.register(updateCommentRoute)
+restApp.register(createCommentRoute)
+restApp.register(getCommentRoute)
+restApp.register(deleteCommentRoute)
+restApp.register(updateCommentRoute)
 
-const start = async () => {
-  try {
-    await app.listen({ port: Number(env.PORT) })
-    console.log(`Server is running on http://localhost:${env.PORT}`)
-  } catch (err) {
-    app.log.error(err)
+restApp.listen({ port: Number(env.REST_PORT) }, (err) => {
+  if (err) {
+    restApp.log.error(err)
     process.exit(1)
   }
-}
+  console.log(`REST API running on port ${env.REST_PORT}`)
+})
 
-start()
+const gqlApp = fastify({ logger: true })
+gqlApp.register(mercurius, {
+  schema: GraphQLSchema,
+  resolvers: GraphQLResolvers,
+  graphiql: true
+})
+
+gqlApp.listen({ port: Number(env.GRAPHQL_PORT) }, (err) => {
+  if (err) {
+    gqlApp.log.error(err)
+    process.exit(1)
+  }
+  console.log(`GraphQL API running on port ${env.GRAPHQL_PORT}`)
+})
