@@ -20,7 +20,7 @@ export const comments = pgTable('comments', {
     .primaryKey()
     .$defaultFn(() => createId()),
   postId: text('post_id')
-    .references(() => posts.id)
+    .references(() => posts.id, { onDelete: 'cascade' })
     .notNull(),
   content: text('content').notNull(),
   createdAt: timestamp('created_at', { withTimezone: true })

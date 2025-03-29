@@ -1,23 +1,21 @@
 import { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import { string, z } from 'zod'
-import { updatePostService } from '../services/update-post-service'
+import { updateCommentService } from '../services/update-comment-service'
 
 export const updatePostRoute: FastifyPluginAsyncZod = async (app) => {
   app.put(
-    '/posts',
+    '/comments',
     {
       schema: {
-        tags: ['posts'],
+        tags: ['comments'],
         description: 'Update Post',
         body: z.object({
-          title: z.string(),
           content: z.string(),
           id: string()
         }),
         response: {
           200: z.object({
             id: z.string(),
-            title: z.string(),
             content: z.string(),
             createdAt: z.date(),
             lastUpdate: z.date()
@@ -40,11 +38,11 @@ export const updatePostRoute: FastifyPluginAsyncZod = async (app) => {
 
     async (request, reply) => {
       try {
-        const { content, title, id } = request.body
+        const { content, id } = request.body
 
-        const updatedPost = await updatePostService({ content, title, id })
+        const updatedComment = await updateCommentService({ content, id })
 
-        return reply.status(200).send(updatedPost)
+        return reply.status(200).send(updatedComment)
       } catch (e: any) {
         return reply.status(500).send({ error: e })
       }

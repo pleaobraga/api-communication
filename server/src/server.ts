@@ -13,6 +13,9 @@ import { createPostRoute } from './routes/create-post-route'
 import { getPostRoute } from './routes/get-post-route'
 import { deletePostRoute } from './routes/delete-post-route'
 import { updatePostRoute } from './routes/update-post-route'
+import { createCommentRoute } from './routes/create-comment-route'
+import { getCommentRoute } from './routes/get-comment-route'
+import { deleteCommentRoute } from './routes/delete-comment-route'
 
 const app = fastify({ logger: true }).withTypeProvider<ZodTypeProvider>()
 
@@ -41,6 +44,10 @@ app.register(createPostRoute)
 app.register(getPostRoute)
 app.register(deletePostRoute)
 app.register(updatePostRoute)
+
+app.register(createCommentRoute)
+app.register(getCommentRoute)
+app.register(deleteCommentRoute)
 
 const start = async () => {
   try {
