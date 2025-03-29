@@ -1,6 +1,7 @@
 import { db } from '../../db/db'
 import { posts } from '../../db/schema'
 import { eq } from 'drizzle-orm'
+import { ConflictError } from '../../errors/conflict-error'
 
 type Params = {
   title: string
@@ -9,14 +10,29 @@ type Params = {
 }
 
 export async function updatePostService({ content, title, id }: Params) {
-  const [existing] = await db.select().from(posts).where(eq(posts.id, id))
-  if (!existing) throw new Error('Post not found')
+  const [currentPost] = await db.select().from(posts).where(eq(posts.id, id))
 
-  const [postUpdated] = await db
+  if (!currentPost) {
+    throw new Error('This Post does not exists')
+  }
+
+  const [samePost] = await db.select().from(posts).where(eq(posts.title, title))
+
+  if (samePost) {
+    throw new ConflictError('This title already exists')
+  }
+
+  const data = {
+    title,
+    content,
+    updatedAt: new Date()
+  }
+
+  const [post] = await db
     .update(posts)
-    .set({ content, title, lastUpdate: new Date() })
+    .set(data)
     .where(eq(posts.id, id))
     .returning()
 
-  return postUpdated
+  return post
 }

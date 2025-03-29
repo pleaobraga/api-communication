@@ -1,5 +1,6 @@
 import { db } from '../../db/db'
-import { comments } from '../../db/schema'
+import { comments, posts } from '../../db/schema'
+import { eq } from 'drizzle-orm'
 
 type Params = {
   content: string
@@ -7,8 +8,21 @@ type Params = {
 }
 
 export async function createCommentService({ content, postId }: Params) {
-  await db.insert(comments).values({
-    content,
-    postId
-  })
+  const [currentPost] = await db
+    .select()
+    .from(posts)
+    .where(eq(posts.id, postId))
+
+  if (!currentPost) {
+    throw new Error('This Post does not exists')
+  }
+
+  const data = {
+    postId,
+    content
+  }
+
+  const [comment] = await db.insert(comments).values(data).returning()
+
+  return comment
 }

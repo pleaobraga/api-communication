@@ -1,12 +1,21 @@
 import { eq } from 'drizzle-orm'
 import { db } from '../../db/db'
-import { comments } from '../../db/schema'
+import { comments, posts } from '../../db/schema'
 
 export async function getCommentService(postId: string) {
-  const postslist = await db
+  const [currentPost] = await db
+    .select()
+    .from(posts)
+    .where(eq(posts.id, postId))
+
+  if (!currentPost) {
+    throw new Error('This Post does not exists')
+  }
+
+  const result = await db
     .select()
     .from(comments)
     .where(eq(comments.postId, postId))
 
-  return postslist
+  return result
 }

@@ -11,11 +11,16 @@ export async function updateCommentService({ content, id }: Params) {
   const [existing] = await db.select().from(comments).where(eq(comments.id, id))
   if (!existing) throw new Error('Comment not found')
 
-  const [commentUpdated] = await db
+  const data = {
+    content,
+    lastUpdate: new Date()
+  }
+
+  const [comment] = await db
     .update(comments)
-    .set({ content, lastUpdate: new Date() })
+    .set(data)
     .where(eq(comments.id, id))
     .returning()
 
-  return commentUpdated
+  return comment
 }

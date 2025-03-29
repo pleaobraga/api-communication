@@ -2,13 +2,17 @@ import { eq } from 'drizzle-orm'
 import { db } from '../../db/db'
 import { comments } from '../../db/schema'
 
-export async function deleteCommentService(commentId: string) {
-  const [comment] = await db
+export async function deleteCommentService(id: string) {
+  const [currentComment] = await db
     .select()
     .from(comments)
-    .where(eq(comments.id, commentId))
+    .where(eq(comments.id, id))
 
-  if (!comment) throw new Error('invalid id')
+  if (!currentComment) {
+    throw new Error('This Comment  does not exists')
+  }
 
-  await db.delete(comments).where(eq(comments.id, commentId))
+  await db.delete(comments).where(eq(comments.id, id))
+
+  return true
 }
