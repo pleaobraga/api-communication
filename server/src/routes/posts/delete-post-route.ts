@@ -1,6 +1,7 @@
 import { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import { z } from 'zod'
-import { deletePostService } from '../services/delete-post-service'
+import { deletePostService } from '../../services/posts/delete-post-service'
+import { errorSchema } from '../../schemas/schema-validators'
 
 export const deletePostRoute: FastifyPluginAsyncZod = async (app) => {
   app.delete(
@@ -15,16 +16,10 @@ export const deletePostRoute: FastifyPluginAsyncZod = async (app) => {
         response: {
           204: z.null(),
           409: z.object({
-            error: z.object({
-              message: z.string(),
-              code: z.string()
-            })
+            error: errorSchema
           }),
           500: z.object({
-            error: z.object({
-              message: z.string().optional(),
-              code: z.string().optional()
-            })
+            error: errorSchema
           })
         }
       }

@@ -1,5 +1,5 @@
-import { db } from '../db/db'
-import { comments } from '../db/schema'
+import { db } from '../../db/db'
+import { comments } from '../../db/schema'
 
 type Params = {
   content: string

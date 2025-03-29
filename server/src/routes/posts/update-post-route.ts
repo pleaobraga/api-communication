@@ -1,6 +1,7 @@
 import { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import { string, z } from 'zod'
-import { updatePostService } from '../services/update-post-service'
+import { updatePostService } from '../../services/posts/update-post-service'
+import { errorSchema, postSchema } from '../../schemas/schema-validators'
 
 export const updatePostRoute: FastifyPluginAsyncZod = async (app) => {
   app.put(
@@ -15,24 +16,12 @@ export const updatePostRoute: FastifyPluginAsyncZod = async (app) => {
           id: string()
         }),
         response: {
-          200: z.object({
-            id: z.string(),
-            title: z.string(),
-            content: z.string(),
-            createdAt: z.date(),
-            lastUpdate: z.date()
-          }),
+          200: postSchema,
           409: z.object({
-            error: z.object({
-              message: z.string(),
-              code: z.string()
-            })
+            error: errorSchema
           }),
           500: z.object({
-            error: z.object({
-              message: z.string().optional(),
-              code: z.string().optional()
-            })
+            error: errorSchema
           })
         }
       }

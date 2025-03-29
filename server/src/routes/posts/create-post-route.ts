@@ -1,7 +1,8 @@
 import { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import { z } from 'zod'
-import { createPostService } from '../services/create-post-service'
-import { ConflictError } from '../errors/conflict-error'
+import { createPostService } from '../../services/posts/create-post-service'
+import { ConflictError } from '../../errors/conflict-error'
+import { errorSchema } from '../../schemas/schema-validators'
 
 export const createPostRoute: FastifyPluginAsyncZod = async (app) => {
   app.post(
@@ -17,16 +18,10 @@ export const createPostRoute: FastifyPluginAsyncZod = async (app) => {
         response: {
           201: z.null(),
           409: z.object({
-            error: z.object({
-              message: z.string(),
-              code: z.string()
-            })
+            error: errorSchema
           }),
           500: z.object({
-            error: z.object({
-              message: z.string().optional(),
-              code: z.string().optional()
-            })
+            error: errorSchema
           })
         }
       }

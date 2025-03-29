@@ -1,6 +1,6 @@
 import { eq } from 'drizzle-orm'
-import { db } from '../db/db'
-import { comments } from '../db/schema'
+import { db } from '../../db/db'
+import { comments } from '../../db/schema'
 
 export async function deleteCommentService(commentId: string) {
   const [comment] = await db

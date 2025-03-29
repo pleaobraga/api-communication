@@ -1,7 +1,8 @@
 import { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import { z } from 'zod'
-import { getPostService } from '../services/get-post-service'
-import { getSinglePostService } from '../services/get-single-post-service'
+import { getPostService } from '../../services/posts/get-post-service'
+import { getSinglePostService } from '../../services/posts/get-single-post-service'
+import { errorSchema, postSchema } from '../../schemas/schema-validators'
 
 export const getPostRoute: FastifyPluginAsyncZod = async (app) => {
   app.get(
@@ -15,21 +16,10 @@ export const getPostRoute: FastifyPluginAsyncZod = async (app) => {
         }),
         response: {
           200: z.object({
-            posts: z.array(
-              z.object({
-                id: z.string(),
-                title: z.string(),
-                content: z.string(),
-                createdAt: z.date(),
-                lastUpdate: z.date()
-              })
-            )
+            posts: z.array(postSchema)
           }),
           500: z.object({
-            error: z.object({
-              message: z.string().optional(),
-              code: z.string().optional()
-            })
+            error: errorSchema
           })
         }
       }

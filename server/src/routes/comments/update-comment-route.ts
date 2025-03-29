@@ -1,36 +1,26 @@
 import { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import { string, z } from 'zod'
-import { updateCommentService } from '../services/update-comment-service'
+import { updateCommentService } from '../../services/comments/update-comment-service'
+import { commentSchema, errorSchema } from '../../schemas/schema-validators'
 
-export const updatePostRoute: FastifyPluginAsyncZod = async (app) => {
+export const updateCommentRoute: FastifyPluginAsyncZod = async (app) => {
   app.put(
     '/comments',
     {
       schema: {
         tags: ['comments'],
-        description: 'Update Post',
+        description: 'Update Comment',
         body: z.object({
           content: z.string(),
           id: string()
         }),
         response: {
-          200: z.object({
-            id: z.string(),
-            content: z.string(),
-            createdAt: z.date(),
-            lastUpdate: z.date()
-          }),
+          200: commentSchema,
           409: z.object({
-            error: z.object({
-              message: z.string(),
-              code: z.string()
-            })
+            error: errorSchema
           }),
           500: z.object({
-            error: z.object({
-              message: z.string().optional(),
-              code: z.string().optional()
-            })
+            error: errorSchema
           })
         }
       }

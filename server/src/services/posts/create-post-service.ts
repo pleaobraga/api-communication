@@ -1,7 +1,7 @@
-import { db } from '../db/db'
-import { posts } from '../db/schema'
+import { db } from '../../db/db'
+import { posts } from '../../db/schema'
 import { eq } from 'drizzle-orm'
-import { ConflictError } from '../errors/conflict-error'
+import { ConflictError } from '../../errors/conflict-error'
 
 type Params = {
   title: string

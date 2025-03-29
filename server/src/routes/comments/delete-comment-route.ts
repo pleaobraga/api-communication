@@ -1,6 +1,7 @@
 import { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import { z } from 'zod'
-import { deleteCommentService } from '../services/delete-comment-service'
+import { deleteCommentService } from '../../services/comments/delete-comment-service'
+import { errorSchema } from '../../schemas/schema-validators'
 
 export const deleteCommentRoute: FastifyPluginAsyncZod = async (app) => {
   app.delete(
@@ -15,10 +16,7 @@ export const deleteCommentRoute: FastifyPluginAsyncZod = async (app) => {
         response: {
           204: z.null(),
           500: z.object({
-            error: z.object({
-              message: z.string().optional(),
-              code: z.string().optional()
-            })
+            error: errorSchema
           })
         }
       }
