@@ -1,6 +1,7 @@
 import { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import { z } from 'zod'
 import { getPostService } from '../services/get-post-service'
+import { getSinglePostService } from '../services/get-single-post-service'
 
 export const getPostRoute: FastifyPluginAsyncZod = async (app) => {
   app.get(
@@ -9,6 +10,9 @@ export const getPostRoute: FastifyPluginAsyncZod = async (app) => {
       schema: {
         tags: ['posts'],
         description: 'Get Post',
+        querystring: z.object({
+          postId: z.string().optional()
+        }),
         response: {
           200: z.object({
             posts: z.array(
@@ -33,6 +37,11 @@ export const getPostRoute: FastifyPluginAsyncZod = async (app) => {
 
     async (request, reply) => {
       try {
+        if (request.query.postId) {
+          const posts = await getSinglePostService(request.query.postId)
+          return reply.status(201).send({ posts })
+        }
+
         const posts = await getPostService()
 
         return reply.status(201).send({ posts })

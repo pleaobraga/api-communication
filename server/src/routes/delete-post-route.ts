@@ -1,6 +1,6 @@
 import { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import { z } from 'zod'
-import { deletePostService } from '../services/get-post-service copy'
+import { deletePostService } from '../services/delete-post-service'
 
 export const deletePostRoute: FastifyPluginAsyncZod = async (app) => {
   app.delete(

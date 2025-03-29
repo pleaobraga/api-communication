@@ -12,6 +12,7 @@ import fastifySwaggerUi from '@fastify/swagger-ui'
 import { createPostRoute } from './routes/create-post-route'
 import { getPostRoute } from './routes/get-post-route'
 import { deletePostRoute } from './routes/delete-post-route'
+import { updatePostRoute } from './routes/update-post-route'
 
 const app = fastify({ logger: true }).withTypeProvider<ZodTypeProvider>()
 
@@ -39,6 +40,7 @@ app.register(fastifySwaggerUi, {
 app.register(createPostRoute)
 app.register(getPostRoute)
 app.register(deletePostRoute)
+app.register(updatePostRoute)
 
 const start = async () => {
   try {
