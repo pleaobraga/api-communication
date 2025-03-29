@@ -11,6 +11,10 @@
     "generate:migration": "drizzle-kit generate",
     "migrate": "drizzle-kit migrate"
   },
+  "engines": {
+    "node": "22.14.0",
+    "pnpm": "10.7.0"
+  },
   "author": "pleaobraga",
   "license": "ISC",
   "description": "",
