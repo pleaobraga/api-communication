@@ -3,16 +3,18 @@ import DOMPurify from 'dompurify'
 
 import { Post } from '@/@types'
 import { cn } from '@/lib/utils'
+import Link from 'next/link'
 
 type Props = Post
 
-export function PostListItem({ content, lastUpdate, title }: Props) {
+export function PostListItem({ content, lastUpdate, title, id }: Props) {
   const formattedLastUpdate = dayjs(lastUpdate).format('DD/MM/YYYY')
 
   const sanitizedHtml = DOMPurify.sanitize(content)
 
   return (
-    <div
+    <Link
+      href={`/post/${id}`}
       className={cn(
         'cursor-pointer w-full p-4 flex flex-col gap-4 border-2 rounded-2xl',
         'hover:bg-gray-100'
@@ -28,6 +30,6 @@ export function PostListItem({ content, lastUpdate, title }: Props) {
           <span>Last Updated:</span> {formattedLastUpdate}
         </div>
       </div>
-    </div>
+    </Link>
   )
 }

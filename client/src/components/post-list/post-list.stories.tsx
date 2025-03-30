@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { PostList } from './'
+import { generateFakePost } from '@/mocks/post.mock'
 
 const meta: Meta<typeof PostList> = {
   title: 'Components/Post List',
@@ -11,4 +12,12 @@ export default meta
 
 type Story = StoryObj<typeof PostList>
 
-export const Default: Story = {}
+const post1 = generateFakePost()
+const post2 = generateFakePost()
+const post3 = generateFakePost()
+
+export const Default: Story = {
+  args: {
+    posts: [post1, post2, post3]
+  }
+}
