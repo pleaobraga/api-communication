@@ -3,12 +3,19 @@ import dayjs from 'dayjs'
 import { Post } from '@/@types'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
+import { FaRegMessage } from 'react-icons/fa6'
 
 import { SanitizedContent } from '../sanitized-content'
 
 type Props = Post
 
-export function PostListItem({ content, lastUpdate, title, id }: Props) {
+export function PostListItem({
+  content,
+  lastUpdate,
+  title,
+  id,
+  comments
+}: Props) {
   const formattedLastUpdate = dayjs(lastUpdate).format('DD/MM/YYYY')
 
   return (
@@ -23,8 +30,13 @@ export function PostListItem({ content, lastUpdate, title, id }: Props) {
       <div className="flex flex-col gap-2">
         <SanitizedContent content={content} classname="line-clamp-2" />
 
-        <div className="flex gap-2 justify-start items-center text-sm font-semibold text-gray-500">
-          <span>Last Updated:</span> {formattedLastUpdate}
+        <div className="flex gap-4">
+          <div className="flex gap-1 items-center font-semibold text-gray-500">
+            {comments?.length} <FaRegMessage />
+          </div>
+          <div className="flex gap-2 justify-start items-center text-sm font-semibold text-gray-500">
+            <span>Last Updated:</span> {formattedLastUpdate}
+          </div>
         </div>
       </div>
     </Link>
