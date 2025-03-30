@@ -15,12 +15,13 @@ export const GraphQLSchema = `
     content: String!
     createdAt: Date!
     lastUpdate: Date!
+    comments: [Comment!]
+    commentsCount: Int!
   }
 
   type Query {
     getPost(id: ID!): Post
     getPosts: [Post]
-    getComments(postId: ID!): [Comment]
   }
 
   type Mutation {

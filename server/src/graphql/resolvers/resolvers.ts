@@ -13,10 +13,7 @@ export const GraphQLResolvers = {
     getPost: async (_: any, { id }: { id: string }) =>
       await getSinglePostService(id),
 
-    getPosts: async () => await getPostService(),
-
-    getComments: async (_: any, { postId }: { postId: string }) =>
-      await getCommentService(postId)
+    getPosts: async () => await getPostService()
   },
   Mutation: {
     createPost: async (
