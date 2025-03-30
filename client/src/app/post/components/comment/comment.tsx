@@ -5,10 +5,11 @@ import { cn } from '@/lib/utils'
 import { useState } from 'react'
 
 import { FaRegTrashCan, FaPencil } from 'react-icons/fa6'
+import { DeleteButton } from './components/delete-button'
 
 type Props = CommentType
 
-export function Comment({ content }: Props) {
+export function Comment({ content, id }: Props) {
   const [isShowingActions, setIsShowingActions] = useState(false)
 
   return (
@@ -27,9 +28,7 @@ export function Comment({ content }: Props) {
               'flex gap-1'
             )}
           >
-            <Button variant="ghost" size="icon">
-              <FaRegTrashCan />
-            </Button>
+            <DeleteButton id={id} />
             <Button variant="ghost" size="icon">
               <FaPencil />
             </Button>
