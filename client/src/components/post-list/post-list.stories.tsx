@@ -3,7 +3,7 @@ import { PostList } from './'
 import { generateFakePost } from '@/mocks/post.mock'
 
 const meta: Meta<typeof PostList> = {
-  title: 'Components/Post List',
+  title: 'Components/Post/Post List',
   component: PostList,
   tags: ['autodocs']
 }

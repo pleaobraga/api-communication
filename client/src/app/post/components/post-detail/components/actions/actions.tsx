@@ -1,7 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { DeleteButton } from '../delete-button'
 import { cn } from '@/lib/utils'
-import { FaCircleCheck, FaCircleXmark, FaPencil } from 'react-icons/fa6'
 
 type Props = {
   postId: string
