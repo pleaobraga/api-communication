@@ -1,16 +1,15 @@
 import dayjs from 'dayjs'
-import DOMPurify from 'dompurify'
 
 import { Post } from '@/@types'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
 
+import { SanitizedContent } from '../sanitized-content'
+
 type Props = Post
 
 export function PostListItem({ content, lastUpdate, title, id }: Props) {
   const formattedLastUpdate = dayjs(lastUpdate).format('DD/MM/YYYY')
-
-  const sanitizedHtml = DOMPurify.sanitize(content)
 
   return (
     <Link
@@ -22,10 +21,8 @@ export function PostListItem({ content, lastUpdate, title, id }: Props) {
     >
       <h1 className="text-3xl font-semibold">{title}</h1>
       <div className="flex flex-col gap-2">
-        <div
-          className="line-clamp-2"
-          dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
-        />
+        <SanitizedContent content={content} classname="line-clamp-2" />
+
         <div className="flex gap-2 justify-start items-center text-sm font-semibold text-gray-500">
           <span>Last Updated:</span> {formattedLastUpdate}
         </div>
