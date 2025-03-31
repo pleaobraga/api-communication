@@ -1,4 +1,6 @@
-import DOMPurify from 'dompurify'
+'use client'
+
+import sanitizeHtml from 'sanitize-html'
 
 type Props = {
   content: string
@@ -6,7 +8,10 @@ type Props = {
 }
 
 export function SanitizedContent({ content, classname = '' }: Props) {
-  const sanitizedHtml = DOMPurify.sanitize(content)
+  const sanitizedHtml = sanitizeHtml(content, {
+    allowedTags: ['b', 'i', 'em', 'strong', 'a', 'p', 'div'],
+    allowedAttributes: { a: ['href'] }
+  })
 
   return (
     <div
