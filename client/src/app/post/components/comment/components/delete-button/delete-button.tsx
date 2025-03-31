@@ -20,7 +20,7 @@ export function DeleteButton({ id }: Props) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="ghost" size="icon">
+        <Button variant="destructive" size="icon">
           <FaRegTrashCan />
         </Button>
       </DialogTrigger>

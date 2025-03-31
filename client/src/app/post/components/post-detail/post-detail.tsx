@@ -34,7 +34,7 @@ export function PostDetail({ id, content, lastUpdate, title }: Props) {
   }
 
   return (
-    <div className={'w-full p-4 flex flex-col gap-4'}>
+    <div className={'w-full flex flex-col gap-4'}>
       <h1 className="text-3xl font-semibold">{title}</h1>
       <div className="flex flex-col gap-2">
         {isEditMode ? (

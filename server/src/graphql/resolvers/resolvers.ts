@@ -4,7 +4,6 @@ import { deleteCommentService } from '../../services/comments/delete-comment-ser
 import { deletePostService } from '../../services/posts/delete-post-service'
 import { updatePostService } from '../../services/posts/update-post-service'
 import { createPostService } from '../../services/posts/create-post-service'
-import { getCommentService } from '../../services/comments/get-comment-service'
 import { getPostService } from '../../services/posts/get-post-service'
 import { getSinglePostService } from '../../services/posts/get-single-post-service'
 

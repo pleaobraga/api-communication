@@ -1,6 +1,5 @@
 import { Button } from '@/components/ui/button'
 import { DeleteButton } from '../delete-button'
-import { cn } from '@/lib/utils'
 import { FaCircleCheck, FaCircleXmark, FaPencil } from 'react-icons/fa6'
 
 type Props = {
@@ -19,13 +18,7 @@ export function Actions({
   onRejectChange
 }: Props) {
   return (
-    <div
-      className={cn(
-        'absolute bottom-[-42px] left-2',
-        'border-1 border-t-0 p-1.5 rounded-b-2xl',
-        'flex gap-1'
-      )}
-    >
+    <div className="flex gap-1">
       {isEditMode ? (
         <>
           <Button variant="ghost" size="icon" onClick={onRejectChange}>
@@ -37,10 +30,15 @@ export function Actions({
         </>
       ) : (
         <>
-          <DeleteButton id={commentId} />
-          <Button variant="ghost" size="icon" onClick={onClickEdit}>
+          <Button
+            className="bg-sky-500 hover:bg-sky-600"
+            variant="default"
+            size="icon"
+            onClick={onClickEdit}
+          >
             <FaPencil />
           </Button>
+          <DeleteButton id={commentId} />
         </>
       )}
     </div>

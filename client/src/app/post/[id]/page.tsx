@@ -1,22 +1,29 @@
+import { CommentList } from '../components/comment-list'
 import { PostDetail } from '../components/post-detail'
 
 type Props = {
-  params: Promise<{ postId: string }>
+  params: Promise<{ id: string }>
 }
 
 export default async function postDetail({ params }: Props) {
-  const { postId } = await params
+  const { id } = await params
 
-  const response = await fetch(`http://localhost:3002/posts?postId=${postId}`)
-  const post = await response.json()
+  const response = await fetch(`http://localhost:3002/posts?postId=${id}`)
+  const { posts } = await response.json()
 
-  if (!post) {
+  if (!posts) {
     return <div>Post not found</div>
   }
 
+  const [post] = posts
+
   return (
-    <div>
-      <PostDetail {...post.post} />
+    <div className="flex flex-col gap-4">
+      <PostDetail {...post} />
+      <div className="flex flex-col gap-4 ">
+        <h2 className="font-semibold text-2xl mt-10">Comments</h2>
+        <CommentList comments={post.comments} />
+      </div>
     </div>
   )
 }

@@ -1,3 +1,5 @@
+'use client'
+
 import { Comment as CommentType } from '@/@types'
 import { SanitizedContent } from '@/components/sanitized-content'
 
@@ -9,7 +11,6 @@ import { Actions } from './components/actions'
 type Props = CommentType
 
 export function Comment({ content, id }: Props) {
-  const [isShowingActions, setIsShowingActions] = useState(false)
   const [newContent, setNewContent] = useState(content)
   const [isEditMode, setIsEditMode] = useState(false)
 
@@ -31,36 +32,20 @@ export function Comment({ content, id }: Props) {
   }
 
   return (
-    <div
-      className="relative p-2"
-      onMouseEnter={() => setIsShowingActions(true)}
-      onMouseLeave={() => setIsShowingActions(false)}
-    >
-      <div className="flex border-1 p-4">
-        {isEditMode ? (
-          <Textarea onChange={handleTextChange} value={newContent} />
-        ) : (
-          <SanitizedContent content={newContent} />
-        )}
-        {isEditMode && (
-          <Actions
-            commentId={id}
-            onClickEdit={handleEdit}
-            isEditMode={isEditMode}
-            onAcceptChange={handleAcceptChanges}
-            onRejectChange={handleRejectChanges}
-          />
-        )}
-        {!isEditMode && isShowingActions && (
-          <Actions
-            commentId={id}
-            onClickEdit={handleEdit}
-            isEditMode={isEditMode}
-            onAcceptChange={handleAcceptChanges}
-            onRejectChange={handleRejectChanges}
-          />
-        )}
-      </div>
+    <div className="flex flex-col gap-2 border-1 p-4">
+      {isEditMode ? (
+        <Textarea onChange={handleTextChange} value={newContent} />
+      ) : (
+        <SanitizedContent content={newContent} />
+      )}
+
+      <Actions
+        commentId={id}
+        onClickEdit={handleEdit}
+        isEditMode={isEditMode}
+        onAcceptChange={handleAcceptChanges}
+        onRejectChange={handleRejectChanges}
+      />
     </div>
   )
 }
