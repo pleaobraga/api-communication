@@ -5,20 +5,14 @@ import dayjs from 'dayjs'
 import { Post } from '@/@types'
 import { SanitizedContent } from '@/components/sanitized-content'
 import { useState } from 'react'
-import { Textarea } from '@/components/ui/textarea'
 import { Actions } from './components/actions'
+import { PostForm } from './components/post-form'
 
 type Props = Post
 
 export function PostDetail({ id, content, lastUpdate, title }: Props) {
   const [isEditMode, setIsEditMode] = useState(false)
-  const [newContent, setNewContent] = useState(content)
-
   const formattedLastUpdate = dayjs(lastUpdate).format('DD/MM/YYYY')
-
-  const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setNewContent(e.target.value)
-  }
 
   const handleEdit = () => {
     setIsEditMode(true)
@@ -29,19 +23,25 @@ export function PostDetail({ id, content, lastUpdate, title }: Props) {
   }
 
   const handleRejectChanges = () => {
-    setNewContent(content)
     setIsEditMode(false)
   }
 
   return (
     <div className={'w-full flex flex-col gap-4'}>
-      <h1 className="text-3xl font-semibold">{title}</h1>
+      {isEditMode ? (
+        <PostForm
+          onFormSubmit={() => {}}
+          defaultContent={content}
+          defaultTitle={title}
+        />
+      ) : (
+        <>
+          <h1 className="text-3xl font-semibold">{title}</h1>{' '}
+          <SanitizedContent content={content} />
+        </>
+      )}
+
       <div className="flex flex-col gap-2">
-        {isEditMode ? (
-          <Textarea onChange={handleTextChange} value={newContent} />
-        ) : (
-          <SanitizedContent content={newContent} />
-        )}
         <div className="flex gap-2 justify-start items-center text-sm font-semibold text-gray-500">
           <span>Last Updated:</span> {formattedLastUpdate}
         </div>
