@@ -13,8 +13,8 @@ export default async function Home() {
   const posts = await res.json()
 
   return (
-    <div className="flex flex-col gap-4 mx-auto max-w-4xl h-[100vh] overflow-clip">
-      <h1 className="text-4xl my-6 font-bold">Post List</h1>
+    <div className="flex flex-col gap-4 mx-20">
+      <h1 className="text-4xl font-bold">Post List</h1>
 
       <PostList posts={posts.posts} />
     </div>
