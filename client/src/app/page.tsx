@@ -14,7 +14,7 @@ export default async function Home() {
 
   return (
     <div className="flex flex-col gap-4 mx-20">
-      <h1 className="text-4xl font-bold">Post List</h1>
+      <h1 className="text-4xl font-black">Post List</h1>
 
       <PostList posts={posts.posts} />
     </div>

@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.className} antialiased`}>
       <body className="bg-slate-200">
-        <div className="flex flex-col mx-auto max-w-6xl my-10 p-4 pb-10 bg-white rounded-4xl">
+        <div className="flex flex-col mx-auto container my-10 pb-10 bg-white rounded-4xl">
           <Header />
           {children}
         </div>
