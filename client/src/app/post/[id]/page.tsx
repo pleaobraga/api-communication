@@ -21,11 +21,10 @@ export default async function postDetail({ params }: Props) {
   return (
     <div className="flex flex-col gap-4">
       <PostDetail {...post} />
-      <CreateComment postId={id} />
-      {/* <div className="flex flex-col gap-4 ">
-        <h2 className="font-semibold text-2xl mt-10">Comments</h2>
+      <div className="flex flex-col gap-10 mt-12">
+        <CreateComment postId={id} />
         <CommentList comments={post.comments} />
-      </div> */}
+      </div>
     </div>
   )
 }

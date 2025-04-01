@@ -6,10 +6,11 @@ import { FormEvent, useState } from 'react'
 
 type Props = {
   postId: string
+  defaultComment?: string
 }
 
-export function CreateComment({ postId }: Props) {
-  const [comment, setComment] = useState('')
+export function CreateComment({ postId, defaultComment = '' }: Props) {
+  const [comment, setComment] = useState(defaultComment)
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()

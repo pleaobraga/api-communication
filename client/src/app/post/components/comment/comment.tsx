@@ -1,18 +1,21 @@
 'use client'
 
-import { Comment as CommentType } from '@/@types'
-import { SanitizedContent } from '@/components/sanitized-content'
-
 import { useState } from 'react'
+import dayjs from 'dayjs'
+import { FaPencil } from 'react-icons/fa6'
 
-import { Textarea } from '@/components/ui/textarea'
-import { Actions } from './components/actions'
+import { Comment as CommentType } from '@/@types'
+import { Button } from '@/components/ui/button'
+import { DeleteButton } from './components/delete-button'
+import { CreateComment } from '../create-comment'
 
 type Props = CommentType
 
-export function Comment({ content, id }: Props) {
+export function Comment({ content, id, lastUpdate, postId }: Props) {
   const [newContent, setNewContent] = useState(content)
   const [isEditMode, setIsEditMode] = useState(false)
+
+  const formattedLastUpdate = dayjs(lastUpdate).format('MMM YYYY')
 
   const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNewContent(e.target.value)
@@ -31,21 +34,36 @@ export function Comment({ content, id }: Props) {
     setIsEditMode(false)
   }
 
-  return (
-    <div className="flex flex-col gap-2 border-1 p-4">
-      {isEditMode ? (
-        <Textarea onChange={handleTextChange} value={newContent} />
-      ) : (
-        <SanitizedContent content={newContent} />
-      )}
+  if (isEditMode) {
+    return (
+      <div className="flex gap-4 items-center">
+        <div className="w-full">
+          <CreateComment postId={postId} defaultComment={content} />
+        </div>
+        <Button size="sm" variant="outline" onClick={handleRejectChanges}>
+          Cancel
+        </Button>
+      </div>
+    )
+  }
 
-      <Actions
-        commentId={id}
-        onClickEdit={handleEdit}
-        isEditMode={isEditMode}
-        onAcceptChange={handleAcceptChanges}
-        onRejectChange={handleRejectChanges}
-      />
+  return (
+    <div className="flex gap-4 group justify-between">
+      <div className="flex flex-col gap-1 font-normal text-sm">
+        <p>{newContent}</p>
+        <span className="text-slate-500">{formattedLastUpdate}</span>
+      </div>
+      <div className="flex gap-1 invisible group-hover:visible">
+        <Button
+          className="text-blue-500"
+          variant="ghost"
+          size="icon"
+          onClick={handleEdit}
+        >
+          <FaPencil />
+        </Button>
+        <DeleteButton id={id} />
+      </div>
     </div>
   )
 }
