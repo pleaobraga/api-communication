@@ -1,4 +1,6 @@
 import { PostList } from '@/components/post-list'
+import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 
 export default async function Home() {
   const res = await fetch(`http://localhost:3002/posts`, {
@@ -13,8 +15,13 @@ export default async function Home() {
   const posts = await res.json()
 
   return (
-    <div className="flex flex-col gap-4 mx-20">
-      <h1 className="text-4xl font-black">Post List</h1>
+    <div className="flex flex-col gap-7 mx-20">
+      <div className="flex justify-between items-center">
+        <h1 className="text-4xl font-bold">Post List</h1>
+        <Button variant="secondary" size="sm" asChild>
+          <Link href="/posts/new-post">New Post</Link>
+        </Button>
+      </div>
 
       <PostList posts={posts.posts} />
     </div>
