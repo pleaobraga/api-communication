@@ -20,7 +20,9 @@ export function DeleteButton({ id }: Props) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="destructive"> Delete Post</Button>
+        <Button variant="outline" size="sm">
+          Delete Post
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>

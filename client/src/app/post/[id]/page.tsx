@@ -1,4 +1,5 @@
 import { CommentList } from '../components/comment-list'
+import { CreateComment } from '../components/create-comment'
 import { PostDetail } from '../components/post-detail'
 
 type Props = {
@@ -20,10 +21,11 @@ export default async function postDetail({ params }: Props) {
   return (
     <div className="flex flex-col gap-4">
       <PostDetail {...post} />
-      <div className="flex flex-col gap-4 ">
+      <CreateComment postId={id} />
+      {/* <div className="flex flex-col gap-4 ">
         <h2 className="font-semibold text-2xl mt-10">Comments</h2>
         <CommentList comments={post.comments} />
-      </div>
+      </div> */}
     </div>
   )
 }

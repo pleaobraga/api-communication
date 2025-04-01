@@ -33,7 +33,7 @@ export function Actions({
         </>
       ) : (
         <>
-          <Button className="bg-sky-500 hover:bg-sky-600" onClick={onClickEdit}>
+          <Button size="sm" onClick={onClickEdit}>
             Edit Post
           </Button>
           <DeleteButton id={postId} />

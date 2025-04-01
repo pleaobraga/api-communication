@@ -8,7 +8,7 @@ export default function PostLayout({
 }>) {
   return (
     <>
-      <div>
+      <div className="self-end">
         <Button variant="secondary" size="sm" asChild>
           <Link href="/">Back to posts</Link>
         </Button>

@@ -17,9 +17,9 @@ export default async function Home() {
   return (
     <div className="flex flex-col gap-7 lg:mx-20 mx-8">
       <div className="flex justify-between items-center">
-        <h1 className="text-4xl font-bold">Post List</h1>
+        <h1 className="text-3xl font-bold">All Posts</h1>
         <Button variant="secondary" size="sm" asChild>
-          <Link href="/posts/new-post">New Post</Link>
+          <Link href="/post/new-post">New Post</Link>
         </Button>
       </div>
 

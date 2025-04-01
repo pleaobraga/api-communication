@@ -12,7 +12,7 @@ type Props = Post
 
 export function PostDetail({ id, content, lastUpdate, title }: Props) {
   const [isEditMode, setIsEditMode] = useState(false)
-  const formattedLastUpdate = dayjs(lastUpdate).format('DD/MM/YYYY')
+  const formattedLastUpdate = dayjs(lastUpdate).format('MMMM DD,YYYY')
 
   const handleEdit = () => {
     setIsEditMode(true)
@@ -28,23 +28,11 @@ export function PostDetail({ id, content, lastUpdate, title }: Props) {
 
   return (
     <div className={'w-full flex flex-col gap-4'}>
-      {isEditMode ? (
-        <PostForm
-          onFormSubmit={() => {}}
-          defaultContent={content}
-          defaultTitle={title}
-        />
-      ) : (
-        <>
-          <h1 className="text-3xl font-semibold">{title}</h1>{' '}
-          <SanitizedContent content={content} />
-        </>
-      )}
-
+      <h1 className="text-3xl font-bold">{title}</h1>
+      <span className="text-sm font-regular text-slate-500">
+        {formattedLastUpdate}
+      </span>
       <div className="flex flex-col gap-2">
-        <div className="flex gap-2 justify-start items-center text-sm font-semibold text-gray-500">
-          <span>Last Updated:</span> {formattedLastUpdate}
-        </div>
         <Actions
           isEditMode={isEditMode}
           onAcceptChange={handleAcceptChanges}
@@ -53,6 +41,7 @@ export function PostDetail({ id, content, lastUpdate, title }: Props) {
           postId={id}
         />
       </div>
+      <SanitizedContent content={content} />
     </div>
   )
 }

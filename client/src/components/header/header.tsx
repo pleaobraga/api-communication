@@ -19,7 +19,7 @@ export function Header() {
           </Link>
         </div>
         <Avatar className="w-10 h-10">
-          <AvatarImage src="profile.png" />
+          <AvatarImage src="/profile.png" />
           <AvatarFallback>PL</AvatarFallback>
         </Avatar>
       </div>
