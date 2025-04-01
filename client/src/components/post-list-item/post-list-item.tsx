@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 import { Post } from '@/@types'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
-import { FaRegMessage } from 'react-icons/fa6'
+import { FaRegMessage, FaRegFileLines, FaRegCalendar } from 'react-icons/fa6'
 
 import { SanitizedContent } from '../sanitized-content'
 
@@ -16,26 +16,33 @@ export function PostListItem({
   id,
   comments
 }: Props) {
-  const formattedLastUpdate = dayjs(lastUpdate).format('DD/MM/YYYY')
+  const formattedLastUpdate = dayjs(lastUpdate).format('MMM DD')
 
   return (
     <Link
       href={`/post/${id}`}
       className={cn(
-        'cursor-pointer w-full p-4 flex flex-col gap-4 border-2 rounded-2xl',
-        'hover:bg-gray-100'
+        'cursor-pointer w-full p-4 flex gap-4 rounded-2xl',
+        'hover:bg-slate-100'
       )}
     >
-      <h1 className="text-3xl font-semibold">{title}</h1>
-      <div className="flex flex-col gap-2">
-        <SanitizedContent content={content} classname="line-clamp-2" />
-
-        <div className="flex gap-4">
-          <div className="flex gap-1 items-center font-semibold text-gray-500">
-            {comments?.length} <FaRegMessage />
+      <div className="flex items-center justify-center p-4 bg-gray-200 rounded-xl">
+        <FaRegFileLines className="w-6 h-6" />
+      </div>
+      <div className="flex justify-between gap-4 w-full">
+        <div className="flex flex-col">
+          <h1 className="text-lg font-medium">{title}</h1>
+          <SanitizedContent
+            content={content}
+            classname="line-clamp-1 text-slate-400 font-normal"
+          />
+        </div>
+        <div className="flex flex-col justify-center items-end min-w-20">
+          <div className="flex gap-1 items-center justify-center font-light">
+            {formattedLastUpdate}
           </div>
-          <div className="flex gap-2 justify-start items-center text-sm font-semibold text-gray-500">
-            <span>Last Updated:</span> {formattedLastUpdate}
+          <div className="flex gap-1 items-center font-medium text-slate-500">
+            <FaRegMessage /> {comments?.length}
           </div>
         </div>
       </div>

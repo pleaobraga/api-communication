@@ -15,7 +15,7 @@ export default async function Home() {
   const posts = await res.json()
 
   return (
-    <div className="flex flex-col gap-7 mx-20">
+    <div className="flex flex-col gap-7 lg:mx-20 mx-8">
       <div className="flex justify-between items-center">
         <h1 className="text-4xl font-bold">Post List</h1>
         <Button variant="secondary" size="sm" asChild>

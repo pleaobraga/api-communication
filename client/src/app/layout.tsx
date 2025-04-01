@@ -20,7 +20,7 @@ export default function RootLayout({
       <body className="bg-slate-200">
         <div className="flex flex-col mx-auto container my-10 pb-10 bg-white rounded-4xl">
           <Header />
-          {children}
+          <main className="flex flex-col gap-7 lg:mx-20 mx-8">{children}</main>
         </div>
       </body>
     </html>
