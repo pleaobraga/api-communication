@@ -7,14 +7,17 @@ import { FaRegMessage, FaRegFileLines, FaRegCalendar } from 'react-icons/fa6'
 
 import { SanitizedContent } from '../sanitized-content'
 
-type Props = Post
+type Props = Pick<
+  Post,
+  'id' | 'title' | 'comments' | 'lastUpdate' | 'description'
+>
 
 export function PostListItem({
-  content,
   lastUpdate,
   title,
   id,
-  comments
+  comments,
+  description
 }: Props) {
   const formattedLastUpdate = dayjs(lastUpdate).format('MMM DD')
 
@@ -32,10 +35,9 @@ export function PostListItem({
       <div className="flex justify-between gap-4 w-full">
         <div className="flex flex-col">
           <h1 className="text-lg font-medium">{title}</h1>
-          <SanitizedContent
-            content={content}
-            classname="line-clamp-1 text-slate-400 font-normal"
-          />
+          <span className="line-clamp-1 text-slate-400 font-normal">
+            {description}
+          </span>
         </div>
         <div className="flex flex-col justify-center items-end min-w-20">
           <div className="flex gap-1 items-center justify-center font-light">

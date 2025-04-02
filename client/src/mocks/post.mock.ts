@@ -6,6 +6,7 @@ export function generateFakePost(): Post {
   const now = new Date().toISOString()
 
   const paragraphs = faker.lorem.paragraphs(3)
+  const description = faker.lorem.sentence(20)
   const comments = [
     generateFakeComment(),
     generateFakeComment(),
@@ -18,6 +19,7 @@ export function generateFakePost(): Post {
     content: paragraphs,
     createdAt: now,
     lastUpdate: now,
-    comments
+    comments,
+    description
   }
 }

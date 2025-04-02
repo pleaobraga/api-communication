@@ -6,6 +6,7 @@ import { EditorContent } from '../editor-content'
 import { Label } from '@radix-ui/react-label'
 import { Button } from '../ui/button'
 import { Textarea } from '../ui/textarea'
+import { useRouter } from 'next/navigation'
 
 type Props = {
   defaultTitle?: string
@@ -18,9 +19,15 @@ export function PostForm({
   defaultTitle = '',
   defaultDescription = ''
 }: Props) {
+  const router = useRouter()
+
   const [title, setTitle] = useState(defaultTitle)
   const [description, setDescription] = useState(defaultDescription)
   const [content, setContent] = useState(defaultContent)
+
+  const handleBack = () => {
+    router.back()
+  }
 
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -57,7 +64,7 @@ export function PostForm({
 
       <div className="flex gap-4 flex-row-reverse">
         <Button type="submit">Save</Button>
-        <Button variant="outline" onClick={() => {}}>
+        <Button variant="outline" onClick={handleBack}>
           Cancel
         </Button>
       </div>
