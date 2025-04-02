@@ -22,7 +22,7 @@ export function EditorContent({ content }: Props) {
     ],
     editorProps: {
       attributes: {
-        class: 'prose m-5 focus:outline-none w-full max-w-full'
+        class: 'prose p-5 focus:outline-none w-full max-w-full'
       }
     },
     content: content
