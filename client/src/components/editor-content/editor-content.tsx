@@ -30,9 +30,11 @@ export function EditorContent({ content }: Props) {
   })
 
   return (
-    <div className="flex flex-col gap-4 border">
+    <div>
       <MenuBar editor={editor} />
-      <TipTapEditor editor={editor} />
+      <div className="flex flex-col gap-4 border">
+        <TipTapEditor editor={editor} />
+      </div>
     </div>
   )
 }

@@ -6,8 +6,8 @@ export default function NewPostPage() {
   const handleFormSubmit = () => {}
 
   return (
-    <div>
-      <h1>new post</h1>
+    <div className="flex flex-col gap-10">
+      <h1 className="text-3xl font-bold">New Post</h1>
       <PostForm onFormSubmit={handleFormSubmit} />
     </div>
   )

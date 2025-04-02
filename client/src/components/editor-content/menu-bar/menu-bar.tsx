@@ -11,7 +11,7 @@ export function MenuBar({ editor }: Props) {
   }
 
   return (
-    <div className="flex gap-2 flex-wrap p-2">
+    <div className="flex gap-2 flex-wrap py-2 pr-2">
       <Button
         variant="outline"
         size="sm"
