@@ -6,6 +6,7 @@ import StarterKit from '@tiptap/starter-kit'
 import Highlight from '@tiptap/extension-highlight'
 import TextAlign from '@tiptap/extension-text-align'
 import { MenuBar } from './menu-bar'
+import { cn } from '@/lib/utils'
 
 type Props = {
   content?: string
@@ -22,7 +23,10 @@ export function EditorContent({ content }: Props) {
     ],
     editorProps: {
       attributes: {
-        class: 'prose p-5 focus:outline-none w-full max-w-full'
+        class: cn(
+          'prose p-5 border focus:outline-none w-full max-w-full rounded-md',
+          'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]'
+        )
       }
     },
     content: content
@@ -31,7 +35,7 @@ export function EditorContent({ content }: Props) {
   return (
     <div>
       <MenuBar editor={editor} />
-      <div className="flex flex-col gap-4 border">
+      <div className="flex flex-col gap-4 ">
         <TipTapEditor editor={editor} />
       </div>
     </div>
