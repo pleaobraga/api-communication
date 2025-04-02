@@ -1,6 +1,8 @@
+'use client'
+
 import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
 import { FormEvent, useState } from 'react'
+import { EditorContent } from '../editor-content'
 
 type Props = {
   onFormSubmit: () => void
@@ -25,7 +27,7 @@ export function PostForm({
   return (
     <form onSubmit={handleFormSubmit} className="flex flex-col gap-4">
       <Input value={title} onChange={(e) => setTitle(e.target.value)} />
-      <Textarea value={content} onChange={(e) => setContent(e.target.value)} />
+      <EditorContent content={content} />
     </form>
   )
 }
