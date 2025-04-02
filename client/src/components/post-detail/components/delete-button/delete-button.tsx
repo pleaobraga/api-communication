@@ -1,5 +1,4 @@
 import { Button } from '@/components/ui/button'
-import { FaRegTrashCan } from 'react-icons/fa6'
 
 import {
   Dialog,

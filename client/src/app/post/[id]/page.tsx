@@ -1,6 +1,6 @@
-import { CommentList } from '../components/comment-list'
-import { CreateComment } from '../components/create-comment'
-import { PostDetail } from '../components/post-detail'
+import { CommentList } from '@/components/comment-list'
+import { CreateComment } from '@/components/create-comment'
+import { PostDetail } from '@/components/post-detail'
 
 type Props = {
   params: Promise<{ id: string }>

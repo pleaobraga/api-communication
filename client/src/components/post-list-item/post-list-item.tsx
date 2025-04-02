@@ -3,9 +3,7 @@ import dayjs from 'dayjs'
 import { Post } from '@/@types'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
-import { FaRegMessage, FaRegFileLines, FaRegCalendar } from 'react-icons/fa6'
-
-import { SanitizedContent } from '../sanitized-content'
+import { FaRegMessage, FaRegFileLines } from 'react-icons/fa6'
 
 type Props = Pick<
   Post,

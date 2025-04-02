@@ -17,16 +17,8 @@ export function Comment({ content, id, lastUpdate, postId }: Props) {
 
   const formattedLastUpdate = dayjs(lastUpdate).format('MMM YYYY')
 
-  const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setNewContent(e.target.value)
-  }
-
   const handleEdit = () => {
     setIsEditMode(true)
-  }
-
-  const handleAcceptChanges = () => {
-    setIsEditMode(false)
   }
 
   const handleRejectChanges = () => {

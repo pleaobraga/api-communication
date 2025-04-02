@@ -25,7 +25,8 @@ export function EditorContent({ content }: Props) {
       attributes: {
         class: cn(
           'prose p-5 border focus:outline-none w-full max-w-full rounded-md',
-          'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]'
+          'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]',
+          'min-h-[20vh]'
         )
       }
     },
