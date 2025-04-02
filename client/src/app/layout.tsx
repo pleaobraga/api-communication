@@ -17,6 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.className} antialiased`}>
+      <head>
+        <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+      </head>
       <body className="bg-slate-200">
         <div className="flex flex-col mx-auto container my-10 pb-10 bg-white rounded-4xl">
           <Header />
