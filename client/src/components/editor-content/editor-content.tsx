@@ -22,11 +22,10 @@ export function EditorContent({ content }: Props) {
     ],
     editorProps: {
       attributes: {
-        class:
-          'prose prose-sm sm:prose-base lg:prose-lg xl:prose-2xl m-5 focus:outline-none'
+        class: 'prose m-5 focus:outline-none w-full max-w-full'
       }
     },
-    content: content ?? '<p>Hello World! 🌎️</p>'
+    content: content
   })
 
   return (

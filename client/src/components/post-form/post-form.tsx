@@ -8,23 +8,22 @@ import { Button } from '../ui/button'
 import { Textarea } from '../ui/textarea'
 
 type Props = {
-  onFormSubmit: () => void
   defaultTitle?: string
   defaultContent?: string
+  defaultDescription?: string
 }
 
 export function PostForm({
-  onFormSubmit,
   defaultContent = '',
-  defaultTitle = ''
+  defaultTitle = '',
+  defaultDescription = ''
 }: Props) {
   const [title, setTitle] = useState(defaultTitle)
+  const [description, setDescription] = useState(defaultDescription)
   const [content, setContent] = useState(defaultContent)
 
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-
-    onFormSubmit()
   }
 
   return (
@@ -46,8 +45,8 @@ export function PostForm({
         </Label>
         <Textarea
           id="Description"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
         />
       </div>
 
