@@ -19,12 +19,14 @@ import {
 import { EditorContent } from '../editor-content'
 import { Button } from '../ui/button'
 import { postFormSchema } from './post-form.schema'
-import { postFormSubmitAction } from './post-form-submit-action'
+import { FormState } from './post-form-validation-action'
 
 type Props = {
   content?: string
   title?: string
   description?: string
+  id?: string | null
+  serverAction: (prevState: FormState, data: FormData) => Promise<FormState>
 }
 
 type PostFormType = z.infer<typeof postFormSchema>
@@ -32,18 +34,21 @@ type PostFormType = z.infer<typeof postFormSchema>
 export function PostForm({
   content = '',
   title = '',
-  description = ''
+  description = '',
+  id = null,
+  serverAction
 }: Props) {
   const router = useRouter()
   const formRef = useRef<HTMLFormElement>(null)
 
-  const [state, formAction] = useActionState(postFormSubmitAction, {
+  const [state, formAction] = useActionState(serverAction, {
     message: ''
   })
 
   const form = useForm<PostFormType>({
     resolver: zodResolver(postFormSchema),
     defaultValues: {
+      id,
       title,
       description,
       content: content || '',
@@ -143,7 +148,7 @@ export function PostForm({
 
           <div className="flex gap-4 flex-row-reverse">
             <Button type="submit">Save</Button>
-            <Button variant="outline" onClick={handleBack}>
+            <Button variant="outline" type="button" onClick={handleBack}>
               Cancel
             </Button>
           </div>

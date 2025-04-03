@@ -13,6 +13,7 @@ export function MenuBar({ editor }: Props) {
   return (
     <div className="flex gap-2 flex-wrap py-2 pr-2">
       <Button
+        type="button"
         variant="outline"
         size="sm"
         onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
@@ -26,6 +27,7 @@ export function MenuBar({ editor }: Props) {
       </Button>
       <Button
         variant="outline"
+        type="button"
         size="sm"
         onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
         className={
@@ -38,6 +40,7 @@ export function MenuBar({ editor }: Props) {
       </Button>
       <Button
         variant="outline"
+        type="button"
         size="sm"
         onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
         className={
@@ -50,6 +53,7 @@ export function MenuBar({ editor }: Props) {
       </Button>
       <Button
         variant="outline"
+        type="button"
         size="sm"
         onClick={() => editor.chain().focus().setParagraph().run()}
         className={
@@ -60,6 +64,7 @@ export function MenuBar({ editor }: Props) {
       </Button>
       <Button
         variant="outline"
+        type="button"
         size="sm"
         onClick={() => editor.chain().focus().toggleBold().run()}
         className={editor.isActive('bold') ? 'bg-slate-600 text-white ' : ''}
@@ -68,6 +73,7 @@ export function MenuBar({ editor }: Props) {
       </Button>
       <Button
         variant="outline"
+        type="button"
         size="sm"
         onClick={() => editor.chain().focus().toggleItalic().run()}
         className={editor.isActive('italic') ? 'bg-slate-600 text-white ' : ''}
@@ -76,6 +82,7 @@ export function MenuBar({ editor }: Props) {
       </Button>
       <Button
         variant="outline"
+        type="button"
         size="sm"
         onClick={() => editor.chain().focus().toggleStrike().run()}
         className={editor.isActive('strike') ? 'bg-slate-600 text-white ' : ''}
@@ -84,6 +91,7 @@ export function MenuBar({ editor }: Props) {
       </Button>
       <Button
         variant="outline"
+        type="button"
         size="sm"
         onClick={() => editor.chain().focus().toggleHighlight().run()}
         className={
@@ -94,6 +102,7 @@ export function MenuBar({ editor }: Props) {
       </Button>
       <Button
         variant="outline"
+        type="button"
         size="sm"
         onClick={() => editor.chain().focus().setTextAlign('left').run()}
         className={
@@ -106,6 +115,7 @@ export function MenuBar({ editor }: Props) {
       </Button>
       <Button
         variant="outline"
+        type="button"
         size="sm"
         onClick={() => editor.chain().focus().setTextAlign('center').run()}
         className={
@@ -118,6 +128,7 @@ export function MenuBar({ editor }: Props) {
       </Button>
       <Button
         variant="outline"
+        type="button"
         size="sm"
         onClick={() => editor.chain().focus().setTextAlign('right').run()}
         className={

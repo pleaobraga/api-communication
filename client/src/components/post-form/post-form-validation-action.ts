@@ -8,7 +8,7 @@ export type FormState = {
   issues?: string[]
 }
 
-export async function postFormSubmitAction(
+export async function formValidationAction(
   prevState: FormState,
   data: FormData
 ): Promise<FormState> {
@@ -27,5 +27,5 @@ export async function postFormSubmitAction(
     }
   }
 
-  return { message: 'Post created' }
+  return { message: 'sucess' }
 }

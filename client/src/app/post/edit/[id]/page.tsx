@@ -1,4 +1,5 @@
 import { PostForm } from '@/components/post-form'
+import { updadatePostAction } from './updadate-post-action'
 
 type Props = {
   params: Promise<{ id: string }>
@@ -20,9 +21,11 @@ export default async function NewPostPage({ params }: Props) {
     <div className="flex flex-col gap-10">
       <h1 className="text-3xl font-bold">Edit Post</h1>
       <PostForm
+        id={id}
         content={post.content}
         title={post.title}
         description={post.description}
+        serverAction={updadatePostAction}
       />
     </div>
   )
