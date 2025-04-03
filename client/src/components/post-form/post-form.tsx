@@ -25,7 +25,7 @@ type Props = {
   content?: string
   title?: string
   description?: string
-  id?: string | null
+  id?: string
   serverAction: (prevState: FormState, data: FormData) => Promise<FormState>
 }
 
@@ -35,7 +35,7 @@ export function PostForm({
   content = '',
   title = '',
   description = '',
-  id = null,
+  id = '',
   serverAction
 }: Props) {
   const router = useRouter()
@@ -48,9 +48,9 @@ export function PostForm({
   const form = useForm<PostFormType>({
     resolver: zodResolver(postFormSchema),
     defaultValues: {
-      id,
+      id: id ?? '',
       title,
-      description,
+      description: description || '',
       content: content || '',
       ...(state?.fields ?? {})
     }
@@ -86,6 +86,21 @@ export function PostForm({
           onSubmit={form.handleSubmit(() => formRef.current?.submit())}
           className="flex flex-col gap-6"
         >
+          <div>
+            <FormField
+              control={form.control}
+              name="id"
+              render={({ field }) => (
+                <FormItem className="hidden">
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
           <div>
             <FormField
               control={form.control}

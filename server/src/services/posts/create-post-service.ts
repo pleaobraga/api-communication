@@ -6,13 +6,20 @@ import { ConflictError } from '../../errors/conflict-error'
 type Params = {
   title: string
   content: string
+  description?: string
 }
 
-export async function createPostService({ content, title }: Params) {
+export async function createPostService({
+  content,
+  title,
+  description
+}: Params) {
   const data = {
     title,
-    content
+    content,
+    description
   }
+
   const [samePost] = await db.select().from(posts).where(eq(posts.title, title))
 
   if (samePost) {

@@ -8,6 +8,7 @@ export async function getSinglePostService(postId: string) {
       id: posts.id,
       title: posts.title,
       content: posts.content,
+      description: posts.description,
       createdAt: posts.createdAt,
       lastUpdate: posts.lastUpdate,
       comments: sql`COALESCE(json_agg(${comments}) FILTER (WHERE ${comments.id} IS NOT NULL), '[]')`

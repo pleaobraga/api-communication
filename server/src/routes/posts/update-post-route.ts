@@ -1,5 +1,5 @@
 import { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
-import { string, z } from 'zod'
+import { z } from 'zod'
 import { updatePostService } from '../../services/posts/update-post-service'
 import { errorSchema, postSchema } from '../../schemas/schema-validators'
 
@@ -10,10 +10,13 @@ export const updatePostRoute: FastifyPluginAsyncZod = async (app) => {
       schema: {
         tags: ['posts'],
         description: 'Update Post',
+        querystring: z.object({
+          id: z.string()
+        }),
         body: z.object({
           title: z.string(),
           content: z.string(),
-          id: string()
+          description: z.string().nullable()
         }),
         response: {
           200: postSchema,
@@ -29,9 +32,17 @@ export const updatePostRoute: FastifyPluginAsyncZod = async (app) => {
 
     async (request, reply) => {
       try {
-        const { content, title, id } = request.body
+        const { id } = request.query
+        const { content, title, description } = request.body
 
-        const updatedPost = await updatePostService({ content, title, id })
+        debugger
+
+        const updatedPost = await updatePostService({
+          content,
+          title,
+          id,
+          description: description ?? ''
+        })
 
         return reply.status(200).send(updatedPost)
       } catch (e: any) {

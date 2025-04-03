@@ -7,7 +7,7 @@ export const posts = pgTable('posts', {
     .$defaultFn(() => createId()),
   title: text('title').notNull(),
   content: text('content').notNull(),
-  description: text('content'),
+  description: text('description'),
   createdAt: timestamp('created_at', { withTimezone: true })
     .notNull()
     .defaultNow(),

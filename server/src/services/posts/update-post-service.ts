@@ -1,22 +1,31 @@
 import { db } from '../../db/db'
 import { posts } from '../../db/schema'
-import { eq } from 'drizzle-orm'
+import { eq, and, ne } from 'drizzle-orm'
 import { ConflictError } from '../../errors/conflict-error'
 
 type Params = {
   title: string
   content: string
   id: string
+  description?: string
 }
 
-export async function updatePostService({ content, title, id }: Params) {
+export async function updatePostService({
+  content,
+  title,
+  id,
+  description
+}: Params) {
   const [currentPost] = await db.select().from(posts).where(eq(posts.id, id))
 
   if (!currentPost) {
     throw new Error('This Post does not exists')
   }
 
-  const [samePost] = await db.select().from(posts).where(eq(posts.title, title))
+  const [samePost] = await db
+    .select()
+    .from(posts)
+    .where(and(eq(posts.title, title), ne(posts.id, id)))
 
   if (samePost) {
     throw new ConflictError('This title already exists')
@@ -25,6 +34,7 @@ export async function updatePostService({ content, title, id }: Params) {
   const data = {
     title,
     content,
+    description,
     updatedAt: new Date()
   }
 

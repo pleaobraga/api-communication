@@ -1,5 +1,6 @@
 'use client'
 
+import { cn } from '@/lib/utils'
 import sanitizeHtml from 'sanitize-html'
 
 type Props = {
@@ -9,13 +10,13 @@ type Props = {
 
 export function SanitizedContent({ content, classname = '' }: Props) {
   const sanitizedHtml = sanitizeHtml(content, {
-    allowedTags: ['b', 'i', 'em', 'strong', 'a', 'p', 'div'],
+    allowedTags: ['b', 'i', 'em', 'strong', 'a', 'p', 'div', 'h1', 'h2', 'h3'],
     allowedAttributes: { a: ['href'] }
   })
 
   return (
     <div
-      className={classname}
+      className={cn('prose', classname)}
       dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
     />
   )

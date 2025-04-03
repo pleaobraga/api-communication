@@ -13,7 +13,8 @@ export const createPostRoute: FastifyPluginAsyncZod = async (app) => {
         description: 'Create Post',
         body: z.object({
           title: z.string(),
-          content: z.string()
+          content: z.string(),
+          description: z.string()
         }),
         response: {
           201: z.null(),
@@ -29,9 +30,9 @@ export const createPostRoute: FastifyPluginAsyncZod = async (app) => {
 
     async (request, reply) => {
       try {
-        const { content, title } = request.body
+        const { content, title, description } = request.body
 
-        await createPostService({ content, title })
+        await createPostService({ content, title, description })
 
         return reply.status(201).send()
       } catch (e: any) {
