@@ -58,13 +58,8 @@ export function PostForm({
   }
 
   return (
-    <Form {...form}>
-      <form
-        ref={formRef}
-        action={formAction}
-        onSubmit={form.handleSubmit(() => formRef.current?.submit())}
-        className="flex flex-col gap-6"
-      >
+    <>
+      <div className="mt-[-20px]">
         {state?.message !== '' && !state.issues && (
           <div className="text-red-500">{state.message}</div>
         )}
@@ -72,7 +67,7 @@ export function PostForm({
           <div className="text-red-500">
             <ul>
               {state.issues.map((issue) => (
-                <li key={issue} className="flex gap-1">
+                <li key={issue} className="flex gap-1 items-center">
                   <FaXmark fill="red" />
                   {issue}
                 </li>
@@ -80,65 +75,77 @@ export function PostForm({
             </ul>
           </div>
         )}
-        <div>
-          <FormField
-            control={form.control}
-            name="title"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormLabel>Title</FormLabel>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
+      </div>
+      <Form {...form}>
+        <form
+          ref={formRef}
+          action={formAction}
+          onSubmit={form.handleSubmit(() => formRef.current?.submit())}
+          className="flex flex-col gap-6"
+        >
+          <div>
+            <FormField
+              control={form.control}
+              name="title"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel>Title</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
 
-        <div>
-          <FormField
-            control={form.control}
-            name="description"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormLabel>Description</FormLabel>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
+          <div>
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel>Description</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
 
-        <div>
-          <FormField
-            control={form.control}
-            name="content"
-            render={({ field: { onChange, value }, fieldState: { error } }) => (
-              <FormItem className="w-full">
-                <FormLabel>Post Content</FormLabel>
-                <FormControl>
-                  <EditorContent
-                    content={value}
-                    onChange={onChange}
-                    hasError={!!error}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
+          <div>
+            <FormField
+              control={form.control}
+              name="content"
+              render={({
+                field: { onChange, value },
+                fieldState: { error }
+              }) => (
+                <FormItem className="w-full">
+                  <FormLabel>Post Content</FormLabel>
+                  <FormControl>
+                    <EditorContent
+                      content={value}
+                      onChange={onChange}
+                      hasError={!!error}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
 
-        <div className="flex gap-4 flex-row-reverse">
-          <Button type="submit">Save</Button>
-          <Button variant="outline" onClick={handleBack}>
-            Cancel
-          </Button>
-        </div>
-      </form>
-    </Form>
+          <div className="flex gap-4 flex-row-reverse">
+            <Button type="submit">Save</Button>
+            <Button variant="outline" onClick={handleBack}>
+              Cancel
+            </Button>
+          </div>
+        </form>
+      </Form>
+    </>
   )
 }

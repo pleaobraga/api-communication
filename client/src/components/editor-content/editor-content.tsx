@@ -38,7 +38,8 @@ export function EditorContent({ content, onChange, hasError }: Props) {
     onUpdate({ editor }) {
       const value = editor.getHTML()
       onChange(value)
-    }
+    },
+    immediatelyRender: typeof window !== 'undefined'
   })
 
   useEffect(() => {
