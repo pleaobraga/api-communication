@@ -27,16 +27,7 @@ export async function createPostAction(
       body: JSON.stringify(dto)
     })
 
-    const value = await response.json()
-
-    console.log('value', value)
-
-    if (!response.ok) {
-      return {
-        message: '',
-        status: 'error'
-      }
-    }
+    await response.json()
 
     return { message: '', status: 'success' }
   } catch (e) {
