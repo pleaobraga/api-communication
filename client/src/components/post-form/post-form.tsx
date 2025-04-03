@@ -20,6 +20,7 @@ import { EditorContent } from '../editor-content'
 import { Button } from '../ui/button'
 import { postFormSchema } from './post-form.schema'
 import { FormState } from './post-form-validation-action'
+import { useReturnAPIToast } from '@/hooks/useReturnAPIToast'
 
 type Props = {
   content?: string
@@ -43,6 +44,12 @@ export function PostForm({
 
   const [state, formAction] = useActionState(serverAction, {
     message: ''
+  })
+
+
+  useReturnAPIToast({
+    status: state.status,
+    successMessage: 'Post Updated successfully'
   })
 
   const form = useForm<PostFormType>({
@@ -80,12 +87,7 @@ export function PostForm({
         )}
       </div>
       <Form {...form}>
-        <form
-          ref={formRef}
-          action={formAction}
-          onSubmit={form.handleSubmit(() => formRef.current?.submit())}
-          className="flex flex-col gap-6"
-        >
+        <form ref={formRef} action={formAction} className="flex flex-col gap-6">
           <div>
             <FormField
               control={form.control}
@@ -162,7 +164,14 @@ export function PostForm({
           </div>
 
           <div className="flex gap-4 flex-row-reverse">
-            <Button type="submit">Save</Button>
+            <Button
+              type="button"
+              onClick={form.handleSubmit(() => {
+                formRef.current?.requestSubmit()
+              })}
+            >
+              Save
+            </Button>
             <Button variant="outline" type="button" onClick={handleBack}>
               Cancel
             </Button>

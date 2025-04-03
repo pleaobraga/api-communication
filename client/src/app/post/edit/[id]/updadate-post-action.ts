@@ -6,11 +6,9 @@ export async function updadatePostAction(
   prevState: FormState,
   data: FormData
 ): Promise<FormState> {
-  console.log('data', data)
-
   const validation = await formValidationAction(prevState, data)
 
-  if (validation.message !== 'sucess') {
+  if (validation.status !== 'success') {
     return validation
   }
 
@@ -32,8 +30,8 @@ export async function updadatePostAction(
 
     await response.json()
 
-    return { message: 'Post Updated' }
+    return { message: 'Post Updated', status: 'success' }
   } catch {
-    return { message: 'Error on update Post' }
+    return { message: 'Error on update Post', status: 'error' }
   }
 }

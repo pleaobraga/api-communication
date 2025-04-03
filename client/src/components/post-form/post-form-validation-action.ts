@@ -6,6 +6,7 @@ export type FormState = {
   message: string
   fields?: Record<string, string>
   issues?: string[]
+  status?: 'success' | 'error'
 }
 
 export async function formValidationAction(
@@ -26,9 +27,10 @@ export async function formValidationAction(
     return {
       message: 'Invalid form data',
       fields,
-      issues: parsed.error.issues.map((issue) => issue.message)
+      issues: parsed.error.issues.map((issue) => issue.message),
+      status: 'error'
     }
   }
 
-  return { message: 'sucess' }
+  return { message: '', status: 'success' }
 }
