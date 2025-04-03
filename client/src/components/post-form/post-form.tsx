@@ -46,10 +46,14 @@ export function PostForm({
     message: ''
   })
 
+  const handleBack = () => {
+    router.back()
+  }
 
   useReturnAPIToast({
     status: state.status,
-    successMessage: 'Post Updated successfully'
+    successMessage: 'Post Updated successfully',
+    onSuccessCallBack: handleBack
   })
 
   const form = useForm<PostFormType>({
@@ -62,10 +66,6 @@ export function PostForm({
       ...(state?.fields ?? {})
     }
   })
-
-  const handleBack = () => {
-    router.back()
-  }
 
   return (
     <>

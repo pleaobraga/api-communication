@@ -1,11 +1,11 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import { toast } from 'sonner'
 
 type Props = {
   status?: 'error' | 'success'
+  onSuccessCallBack: () => void
   successMessage: string
   errorMessage?: string
 }
@@ -13,21 +13,18 @@ type Props = {
 export function useReturnAPIToast({
   successMessage,
   errorMessage = 'There was an Error',
+  onSuccessCallBack,
   status
 }: Props) {
-  console.log('status', status)
-
-  const router = useRouter()
-
   const handleSuccess = () =>
     toast(successMessage, {
       action: {
         label: 'ok',
-        onClick: () => router.push('/')
+        onClick: onSuccessCallBack
       }
     })
 
-  const handleError = () => toast(errorMessage, {})
+  const handleError = () => toast(errorMessage)
 
   useEffect(() => {
     if (status === 'success') {
