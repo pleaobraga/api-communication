@@ -19,7 +19,11 @@ export default async function NewPostPage({ params }: Props) {
   return (
     <div className="flex flex-col gap-10">
       <h1 className="text-3xl font-bold">Edit Post</h1>
-      <PostForm defaultContent={post.content} defaultTitle={post.title} />
+      <PostForm
+        content={post.content}
+        title={post.title}
+        description={post.description}
+      />
     </div>
   )
 }
