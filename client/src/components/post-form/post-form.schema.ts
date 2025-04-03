@@ -9,8 +9,8 @@ export const postFormSchema = z.object({
   description: z.string(),
   content: z
     .string()
+    .min(1, { message: 'Post content is required' })
     .regex(tagContentRegex, {
       message: 'Post content is required'
     })
-    .default('')
 })

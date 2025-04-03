@@ -1,9 +1,11 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useRef } from 'react'
+import React, { useActionState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { FaXmark } from 'react-icons/fa6'
 
 import { Input } from '@/components/ui/input'
 import {
@@ -16,7 +18,8 @@ import {
 } from '@/components/ui/form'
 import { EditorContent } from '../editor-content'
 import { Button } from '../ui/button'
-import { FaXmark } from 'react-icons/fa6'
+import { postFormSchema } from './post-form.schema'
+import { postFormSubmitAction } from './post-form-submit-action'
 
 type Props = {
   content?: string
@@ -24,12 +27,7 @@ type Props = {
   description?: string
 }
 
-type PostFormType = z.output<typeof postFormSchema>
-
-import { postFormSchema } from './post-form.schema'
-import { useFormState } from 'react-dom'
-import { z } from 'zod'
-import { postFormSubmitAction } from './post-form-submit-action'
+type PostFormType = z.infer<typeof postFormSchema>
 
 export function PostForm({
   content = '',
@@ -39,7 +37,7 @@ export function PostForm({
   const router = useRouter()
   const formRef = useRef<HTMLFormElement>(null)
 
-  const [state, formAction] = useFormState(postFormSubmitAction, {
+  const [state, formAction] = useActionState(postFormSubmitAction, {
     message: ''
   })
 
@@ -48,7 +46,7 @@ export function PostForm({
     defaultValues: {
       title,
       description,
-      content,
+      content: content || '',
       ...(state?.fields ?? {})
     }
   })
@@ -126,11 +124,16 @@ export function PostForm({
                 <FormItem className="w-full">
                   <FormLabel>Post Content</FormLabel>
                   <FormControl>
-                    <EditorContent
-                      content={value}
-                      onChange={onChange}
-                      hasError={!!error}
-                    />
+                    <div>
+                      <EditorContent
+                        content={value}
+                        onChange={onChange}
+                        hasError={!!error}
+                      />
+
+                      {/* Hidden input to ensure content is sent when JavaScript is disabled */}
+                      <input type="hidden" name="content" value={value} />
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
