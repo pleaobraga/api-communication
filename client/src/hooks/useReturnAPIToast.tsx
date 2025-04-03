@@ -12,7 +12,7 @@ type Props = {
 
 export function useReturnAPIToast({
   successMessage,
-  errorMessage = 'There was an Error',
+  errorMessage = 'Request failed. Please try again',
   onSuccessCallBack,
   status
 }: Props) {
