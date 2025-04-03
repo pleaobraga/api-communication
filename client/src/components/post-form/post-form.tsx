@@ -42,7 +42,7 @@ export function PostForm({
   const router = useRouter()
   const formRef = useRef<HTMLFormElement>(null)
 
-  const [state, formAction] = useActionState(serverAction, {
+  const [state, formAction, isPending] = useActionState(serverAction, {
     message: ''
   })
 
@@ -53,7 +53,8 @@ export function PostForm({
   useReturnAPIToast({
     status: state.status,
     successMessage: 'Post Updated successfully',
-    onSuccessCallBack: handleBack
+    onSuccessCallBack: handleBack,
+    isPendingAction: isPending
   })
 
   const form = useForm<PostFormType>({

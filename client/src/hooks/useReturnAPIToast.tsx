@@ -4,17 +4,19 @@ import { useEffect } from 'react'
 import { toast } from 'sonner'
 
 type Props = {
-  status?: 'error' | 'success'
+  status?: 'error' | 'success' | 'loading'
   onSuccessCallBack: () => void
   successMessage: string
   errorMessage?: string
+  isPendingAction: boolean
 }
 
 export function useReturnAPIToast({
   successMessage,
   errorMessage = 'Request failed. Please try again',
   onSuccessCallBack,
-  status
+  status,
+  isPendingAction
 }: Props) {
   const handleSuccess = () =>
     toast(successMessage, {
@@ -36,5 +38,5 @@ export function useReturnAPIToast({
       debugger
       handleError()
     }
-  }, [status])
+  }, [status, isPendingAction])
 }

@@ -36,16 +36,16 @@ export const createPostRoute: FastifyPluginAsyncZod = async (app) => {
 
         return reply.status(201).send()
       } catch (e: any) {
-        if (e instanceof ConflictError) {
-          return reply.status(e.statusCode).send({
-            error: {
-              message: e.message,
-              code: e.code
-            }
-          })
-        }
+        // if (e instanceof ConflictError) {
+        //   return reply.status(409).send({
+        //     error: {
+        //       message: e.message,
+        //       code: e.code
+        //     }
+        //   })
+        // }
 
-        return reply.status(500).send({ error: e })
+        return reply.code(500).send({ error: e })
       }
     }
   )

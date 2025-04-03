@@ -2,7 +2,7 @@
 
 import { FormState, formValidationAction } from '@/components/post-form'
 
-export async function updadatePostAction(
+export async function createPostAction(
   prevState: FormState,
   data: FormData
 ): Promise<FormState> {
@@ -14,24 +14,34 @@ export async function updadatePostAction(
 
   try {
     const dto = {
-      id: data.get('id'),
       title: data.get('title'),
       description: data.get('description'),
       content: data.get('content')
     }
 
-    const response = await fetch(`http://localhost:3002/posts?id=${dto.id}`, {
-      method: 'PUT',
+    const response = await fetch(`http://localhost:3002/posts`, {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(dto)
     })
 
-    await response.json()
+    const value = await response.json()
+
+    console.log('value', value)
+
+    if (!response.ok) {
+      return {
+        message: '',
+        status: 'error'
+      }
+    }
 
     return { message: '', status: 'success' }
-  } catch {
+  } catch (e) {
+    console.log('e', e)
+
     return { message: '', status: 'error' }
   }
 }
