@@ -17,13 +17,22 @@ export const GraphQLResolvers = {
   Mutation: {
     createPost: async (
       _: any,
-      { title, content }: { title: string; content: string }
-    ) => await createPostService({ title, content }),
+      {
+        title,
+        content,
+        description
+      }: { title: string; content: string; description: string }
+    ) => await createPostService({ title, content, description }),
 
     updatePost: async (
       _: any,
-      { id, title, content }: { id: string; title: string; content: string }
-    ) => await updatePostService({ id, title, content }),
+      {
+        id,
+        title,
+        content,
+        description
+      }: { id: string; title: string; content: string; description?: string }
+    ) => await updatePostService({ id, title, content, description }),
 
     deletePost: async (_: any, { id }: { id: string }) =>
       await deletePostService(id),

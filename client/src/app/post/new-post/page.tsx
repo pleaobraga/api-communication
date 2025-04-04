@@ -1,5 +1,3 @@
-'use client'
-
 import { PostForm } from '@/components/post-form'
 import { createPostAction } from './create-post-action'
 

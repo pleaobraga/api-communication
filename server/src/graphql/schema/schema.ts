@@ -5,6 +5,7 @@ export const GraphQLSchema = `
     id: ID!
     title: String!
     content: String!
+    description: String
     createdAt: Date!
     lastUpdate: Date!
   }
