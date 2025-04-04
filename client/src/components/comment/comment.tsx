@@ -8,15 +8,26 @@ import { DeleteButton } from './components/delete-button'
 import { MutateComment } from '../mutate-comment'
 import { useComment } from './useComment'
 
-type Props = Omit<CommentType, 'createdAt'>
+type Props = Omit<CommentType, 'createdAt'> & {
+  handleUpdatedSuccess: (comment: CommentType) => void
+  handleDeleteSuccess: (id: string) => void
+}
 
-export function Comment({ content, id, lastUpdate, postId }: Props) {
+export function Comment({
+  content,
+  id,
+  lastUpdate,
+  postId,
+  handleDeleteSuccess,
+  handleUpdatedSuccess
+}: Props) {
   const {
     formattedLastUpdate,
     handleEdit,
     handleRejectChanges,
     isEditMode,
-    newContent
+    newContent,
+    exitEditMode
   } = useComment({ content, id, lastUpdate, postId })
 
   if (isEditMode) {
@@ -24,9 +35,14 @@ export function Comment({ content, id, lastUpdate, postId }: Props) {
       <div className="flex gap-4 items-center">
         <div className="w-full">
           <MutateComment
+            id={id}
             postId={postId}
             defaultComment={content}
-            onSuccess={() => {}}
+            onSuccess={(comment: CommentType) => {
+              handleUpdatedSuccess(comment)
+              exitEditMode()
+            }}
+            isEdition
           />
         </div>
         <Button size="sm" variant="outline" onClick={handleRejectChanges}>
@@ -51,7 +67,7 @@ export function Comment({ content, id, lastUpdate, postId }: Props) {
         >
           <FaPencil />
         </Button>
-        <DeleteButton id={id} />
+        <DeleteButton id={id} handleDeleteSuccess={handleDeleteSuccess} />
       </div>
     </div>
   )

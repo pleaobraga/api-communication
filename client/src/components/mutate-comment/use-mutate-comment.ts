@@ -14,7 +14,7 @@ type Props = {
 }
 
 export function useMutateComment({
-  id,
+  id = '',
   postId,
   onSuccess,
   defaultComment,

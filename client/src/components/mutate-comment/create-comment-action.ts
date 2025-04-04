@@ -1,3 +1,5 @@
+'use server'
+
 type Props = {
   postId: string
   comment: string

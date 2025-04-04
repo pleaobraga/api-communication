@@ -1,6 +1,8 @@
 import { Button } from '@/components/ui/button'
 import { FaRegTrashCan } from 'react-icons/fa6'
 
+import { Comment } from '@/@types'
+
 import {
   Dialog,
   DialogContent,
@@ -11,12 +13,34 @@ import {
   DialogTrigger,
   DialogClose
 } from '@/components/ui/dialog'
+import { toast } from 'sonner'
+import { deleteCommentAction } from './delete-comment-action'
+import { useState } from 'react'
 
 type Props = {
   id: string
+  handleDeleteSuccess: (id: string) => void
 }
 
-export function DeleteButton({ id }: Props) {
+export function DeleteButton({ id, handleDeleteSuccess }: Props) {
+  const [isLoading, setIsLoading] = useState(false)
+
+  async function handleDelete() {
+    setIsLoading(true)
+
+    const { status } = await deleteCommentAction({ id })
+
+    setIsLoading(false)
+
+    if (status === 'error') {
+      toast.error('Request failed. Please try again')
+      return
+    }
+
+    toast.success('Post delete successfully')
+    handleDeleteSuccess(id)
+  }
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -34,11 +58,13 @@ export function DeleteButton({ id }: Props) {
         </DialogHeader>
         <DialogFooter>
           <DialogClose asChild>
-            <Button type="button" variant="secondary">
+            <Button type="button" variant="secondary" disabled={isLoading}>
               Cancel
             </Button>
           </DialogClose>
-          <Button type="button">Delete</Button>
+          <Button type="button" onClick={handleDelete} disabled={isLoading}>
+            {isLoading ? 'Loading...' : 'Delete'}
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

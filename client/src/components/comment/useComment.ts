@@ -4,7 +4,7 @@ import { Comment as CommentType } from '@/@types'
 import dayjs from 'dayjs'
 import { useState } from 'react'
 
-type Props = Omit<CommentType, 'createdAt'>
+type Props = Omit<CommentType, 'createdAt'> & {}
 
 export function useComment({ content, id, lastUpdate, postId }: Props) {
   const [newContent, setNewContent] = useState(content)
@@ -18,6 +18,10 @@ export function useComment({ content, id, lastUpdate, postId }: Props) {
 
   const handleRejectChanges = () => {
     setNewContent(content)
+    exitEditMode()
+  }
+
+  const exitEditMode = () => {
     setIsEditMode(false)
   }
 
@@ -26,6 +30,7 @@ export function useComment({ content, id, lastUpdate, postId }: Props) {
     handleEdit,
     formattedLastUpdate,
     newContent,
-    isEditMode
+    isEditMode,
+    exitEditMode
   }
 }

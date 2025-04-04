@@ -25,7 +25,10 @@ import { GraphQLResolvers } from './graphql/resolvers/resolvers'
 const restApp = fastify({ logger: true }).withTypeProvider<ZodTypeProvider>()
 
 restApp.register(fastifyCors, {
-  origin: '*'
+  origin: '*',
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 })
 
 restApp.setValidatorCompiler(validatorCompiler)
