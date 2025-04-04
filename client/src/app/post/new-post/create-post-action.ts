@@ -33,8 +33,6 @@ export async function createPostAction(
 
     return { message: '', status: 'success' }
   } catch (e) {
-    console.log('e', e)
-
     return { message: '', status: 'error' }
   }
 }

@@ -18,19 +18,9 @@ export function CommentsSection({ comments: defaulComents, postId }: Props) {
   }
 
   const handleUpdatedSuccess = (comment: Comment) => {
-    setComments((state) => {
-      const currentIndex = state.findIndex(
-        (current) => current.id === comment.id
-      )
-
-      if (currentIndex < 0) {
-        return [...state]
-      }
-
-      state[currentIndex] = comment
-
-      return [...state]
-    })
+    setComments((prevComments) =>
+      prevComments.map((c) => (c.id === comment.id ? comment : c))
+    )
   }
 
   const handleDeleteSuccess = (id: string) => {

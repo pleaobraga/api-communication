@@ -26,9 +26,8 @@ export function Comment({
     handleEdit,
     handleRejectChanges,
     isEditMode,
-    newContent,
     exitEditMode
-  } = useComment({ content, id, lastUpdate, postId })
+  } = useComment({ lastUpdate })
 
   if (isEditMode) {
     return (
@@ -55,7 +54,7 @@ export function Comment({
   return (
     <div className="flex gap-4 group justify-between">
       <div className="flex flex-col gap-1 font-normal text-sm">
-        <p>{newContent}</p>
+        <p>{content}</p>
         <span className="text-slate-500">{formattedLastUpdate}</span>
       </div>
       <div className="flex gap-1 invisible group-hover:visible">

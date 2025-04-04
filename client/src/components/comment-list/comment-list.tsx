@@ -12,6 +12,8 @@ export function CommentList({
   handleDeleteSuccess,
   handleUpdatedSuccess
 }: Props) {
+  console.log('comments in list', comments)
+
   return (
     <div className="flex flex-col gap-6">
       {comments.map(({ content, id, lastUpdate, postId }) => (

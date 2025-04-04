@@ -28,8 +28,6 @@ export async function createCommentAction({ comment, postId }: Props) {
 
     return { message: '', status: 'success', data }
   } catch (e) {
-    console.log('e', e)
-
     return { message: '', status: 'error' }
   }
 }

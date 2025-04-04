@@ -28,8 +28,6 @@ export function MutateComment({
     handleUpdateComment
   } = useMutateComment({ postId, defaultComment, onSuccess, id })
 
-  console.log('isEdition', isEdition)
-
   return (
     <div className="flex items-center gap-4">
       <Input

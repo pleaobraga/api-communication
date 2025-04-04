@@ -19,8 +19,6 @@ export async function updateCommentAction({ comment, id }: Props) {
       body: JSON.stringify(dto)
     })
 
-    console.log('response', response)
-
     if (!response.ok) {
       throw new Error('Failed to update comment')
     }
@@ -29,8 +27,6 @@ export async function updateCommentAction({ comment, id }: Props) {
 
     return { message: '', status: 'success', data }
   } catch (e) {
-    console.log('e', e)
-
     return { message: '', status: 'error' }
   }
 }
