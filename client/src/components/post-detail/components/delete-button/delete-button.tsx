@@ -27,11 +27,11 @@ export function DeleteButton({ id }: Props) {
     const { status } = await deletePostAction({ id })
 
     if (status === 'error') {
-      toast('Request failed. Please try again')
+      toast.error('Request failed. Please try again')
       return
     }
 
-    toast('Post delete successfully')
+    toast.success('Post delete successfully')
     router.push('/')
   }
 

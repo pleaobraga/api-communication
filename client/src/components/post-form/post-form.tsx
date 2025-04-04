@@ -28,6 +28,7 @@ type Props = {
   description?: string
   id?: string
   serverAction: (prevState: FormState, data: FormData) => Promise<FormState>
+  successMessage: string
 }
 
 type PostFormType = z.infer<typeof postFormSchema>
@@ -37,7 +38,8 @@ export function PostForm({
   title = '',
   description = '',
   id = '',
-  serverAction
+  serverAction,
+  successMessage
 }: Props) {
   const router = useRouter()
   const formRef = useRef<HTMLFormElement>(null)
@@ -52,7 +54,7 @@ export function PostForm({
 
   useReturnAPIToast({
     status: state.status,
-    successMessage: 'Post Updated successfully',
+    successMessage,
     onSuccessCallBack: handleBack,
     isPendingAction: isPending
   })

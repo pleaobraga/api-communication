@@ -22,8 +22,6 @@ export async function formValidationAction(
       fields[key] = formData[key].toString()
     }
 
-    console.log('issues', parsed.error.issues)
-
     return {
       message: 'Invalid form data',
       fields,

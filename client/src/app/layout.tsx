@@ -23,7 +23,7 @@ export default function RootLayout({
           <Header />
           <main className="flex flex-col gap-7 lg:mx-20 mx-8">{children}</main>
         </div>
-        <Toaster />
+        <Toaster richColors />
       </body>
     </html>
   )

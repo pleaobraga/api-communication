@@ -1,7 +1,7 @@
 import { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import { z } from 'zod'
 import { createCommentService } from '../../services/comments/create-comment-service'
-import { errorSchema } from '../../schemas/schema-validators'
+import { commentSchema, errorSchema } from '../../schemas/schema-validators'
 
 export const createCommentRoute: FastifyPluginAsyncZod = async (app) => {
   app.post(
@@ -15,7 +15,9 @@ export const createCommentRoute: FastifyPluginAsyncZod = async (app) => {
           postId: z.string()
         }),
         response: {
-          201: z.null(),
+          201: z.object({
+            comment: commentSchema
+          }),
           500: z.object({
             error: errorSchema
           })
@@ -27,9 +29,9 @@ export const createCommentRoute: FastifyPluginAsyncZod = async (app) => {
       try {
         const { content, postId } = request.body
 
-        await createCommentService({ content, postId })
+        const comment = await createCommentService({ content, postId })
 
-        return reply.status(201).send()
+        return reply.status(201).send({ comment })
       } catch (e: any) {
         return reply.status(500).send({ error: e })
       }

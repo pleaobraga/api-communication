@@ -18,24 +18,21 @@ export function useReturnAPIToast({
   status,
   isPendingAction
 }: Props) {
-  const handleSuccess = () =>
-    toast(successMessage, {
-      action: {
-        label: 'ok',
-        onClick: onSuccessCallBack
-      }
-    })
+  const handleSuccess = () => {
+    toast.success(successMessage)
+    onSuccessCallBack()
+  }
 
-  const handleError = () => toast(errorMessage)
+  const handleError = () => {
+    toast.error(errorMessage)
+  }
 
   useEffect(() => {
     if (status === 'success') {
-      debugger
       handleSuccess()
     }
 
     if (status === 'error') {
-      debugger
       handleError()
     }
   }, [status, isPendingAction])

@@ -26,6 +26,7 @@ export default async function NewPostPage({ params }: Props) {
         title={post.title}
         description={post.description}
         serverAction={updadatePostAction}
+        successMessage="Post updated successfully!"
       />
     </div>
   )

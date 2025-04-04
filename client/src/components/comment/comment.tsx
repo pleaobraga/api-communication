@@ -30,7 +30,11 @@ export function Comment({ content, id, lastUpdate, postId }: Props) {
     return (
       <div className="flex gap-4 items-center">
         <div className="w-full">
-          <CreateComment postId={postId} defaultComment={content} />
+          <CreateComment
+            postId={postId}
+            defaultComment={content}
+            onSuccess={() => {}}
+          />
         </div>
         <Button size="sm" variant="outline" onClick={handleRejectChanges}>
           Cancel
