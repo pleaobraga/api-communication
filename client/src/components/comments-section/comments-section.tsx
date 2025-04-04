@@ -1,7 +1,7 @@
 'use client'
 
 import { Comment } from '@/@types'
-import { CreateComment } from '../create-comment'
+import { MutateComment } from '../mutate-comment'
 import { CommentList } from '../comment-list'
 import { useState } from 'react'
 
@@ -19,7 +19,7 @@ export function CommentsSection({ comments: defaulComents, postId }: Props) {
 
   return (
     <div className="flex flex-col gap-10 mt-12">
-      <CreateComment postId={postId} onSuccess={handleSuccess} />
+      <MutateComment postId={postId} onSuccess={handleSuccess} />
       <CommentList comments={comments} />
     </div>
   )

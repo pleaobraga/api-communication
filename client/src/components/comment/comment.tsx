@@ -5,7 +5,7 @@ import { FaPencil } from 'react-icons/fa6'
 import { Comment as CommentType } from '@/@types'
 import { Button } from '@/components/ui/button'
 import { DeleteButton } from './components/delete-button'
-import { CreateComment } from '../create-comment'
+import { MutateComment } from '../mutate-comment'
 import { useComment } from './useComment'
 
 type Props = Omit<CommentType, 'createdAt'>
@@ -23,7 +23,7 @@ export function Comment({ content, id, lastUpdate, postId }: Props) {
     return (
       <div className="flex gap-4 items-center">
         <div className="w-full">
-          <CreateComment
+          <MutateComment
             postId={postId}
             defaultComment={content}
             onSuccess={() => {}}

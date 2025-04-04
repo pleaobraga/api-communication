@@ -10,12 +10,16 @@ export const updateCommentRoute: FastifyPluginAsyncZod = async (app) => {
       schema: {
         tags: ['comments'],
         description: 'Update Comment',
-        body: z.object({
-          content: z.string(),
+        querystring: z.object({
           id: string()
         }),
+        body: z.object({
+          content: z.string()
+        }),
         response: {
-          200: commentSchema,
+          200: z.object({
+            comment: commentSchema
+          }),
           409: z.object({
             error: errorSchema
           }),
@@ -28,11 +32,12 @@ export const updateCommentRoute: FastifyPluginAsyncZod = async (app) => {
 
     async (request, reply) => {
       try {
-        const { content, id } = request.body
+        const { id } = request.query
+        const { content } = request.body
 
         const updatedComment = await updateCommentService({ content, id })
 
-        return reply.status(200).send(updatedComment)
+        return reply.status(200).send({ comment: updatedComment })
       } catch (e: any) {
         return reply.status(500).send({ error: e })
       }

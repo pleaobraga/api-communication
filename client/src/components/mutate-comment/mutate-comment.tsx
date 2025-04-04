@@ -3,21 +3,30 @@
 import { Comment } from '@/@types'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { useCreateComment } from './use-create-comment'
+import { useMutateComment } from './use-mutate-comment'
 
 type Props = {
   postId: string
   defaultComment?: string
   onSuccess: (comment: Comment) => void
+  isEdition?: boolean
+  id?: string
 }
 
-export function CreateComment({
+export function MutateComment({
   postId,
+  id = '',
   defaultComment = '',
-  onSuccess
+  onSuccess,
+  isEdition
 }: Props) {
-  const { comment, handleCreateComment, isLoading, setComment } =
-    useCreateComment({ postId, defaultComment, onSuccess })
+  const {
+    comment,
+    handleCreateComment,
+    isLoading,
+    setComment,
+    handleUpdateComment
+  } = useMutateComment({ postId, defaultComment, onSuccess, id })
 
   return (
     <div className="flex items-center gap-4">
@@ -30,7 +39,7 @@ export function CreateComment({
       <Button
         className="bg-blue-500 hover:bg-blue-500/90"
         size="sm"
-        onClick={handleCreateComment}
+        onClick={isEdition ? handleUpdateComment : handleCreateComment}
         disabled={isLoading}
       >
         {isLoading ? 'loading...' : 'comment'}

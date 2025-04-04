@@ -11,10 +11,10 @@ export const deleteCommentRoute: FastifyPluginAsyncZod = async (app) => {
         tags: ['comments'],
         description: 'Delete Comment',
         querystring: z.object({
-          commentId: z.string()
+          id: z.string()
         }),
         response: {
-          204: z.null(),
+          204: z.object({}),
           500: z.object({
             error: errorSchema
           })
@@ -24,11 +24,11 @@ export const deleteCommentRoute: FastifyPluginAsyncZod = async (app) => {
 
     async (request, reply) => {
       try {
-        const { commentId } = request.query
+        const { id } = request.query
 
-        await deleteCommentService(commentId)
+        await deleteCommentService(id)
 
-        return reply.status(204).send()
+        return reply.status(204).send({})
       } catch (e: any) {
         return reply.status(500).send({ error: e })
       }
