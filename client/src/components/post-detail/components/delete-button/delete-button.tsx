@@ -1,3 +1,5 @@
+'use client'
+
 import { Button } from '@/components/ui/button'
 
 import {
@@ -10,12 +12,29 @@ import {
   DialogTrigger,
   DialogClose
 } from '@/components/ui/dialog'
+import { deletePostAction } from './delete-post-action'
+import { toast } from 'sonner'
+import { useRouter } from 'next/navigation'
 
 type Props = {
   id: string
 }
 
 export function DeleteButton({ id }: Props) {
+  const router = useRouter()
+
+  async function handleDelete() {
+    const { status } = await deletePostAction({ id })
+
+    if (status === 'error') {
+      toast('Request failed. Please try again')
+      return
+    }
+
+    toast('Post delete successfully')
+    router.push('/')
+  }
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -37,7 +56,9 @@ export function DeleteButton({ id }: Props) {
               Cancel
             </Button>
           </DialogClose>
-          <Button type="button">Delete</Button>
+          <Button type="button" onClick={handleDelete}>
+            Delete
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

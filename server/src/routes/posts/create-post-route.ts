@@ -17,7 +17,7 @@ export const createPostRoute: FastifyPluginAsyncZod = async (app) => {
           description: z.string()
         }),
         response: {
-          201: z.null(),
+          201: z.object({}),
           409: z.object({
             error: errorSchema
           }),
@@ -34,7 +34,7 @@ export const createPostRoute: FastifyPluginAsyncZod = async (app) => {
 
         await createPostService({ content, title, description })
 
-        return reply.status(201).send()
+        return reply.status(201).send({})
       } catch (e: any) {
         if (e instanceof ConflictError) {
           return reply.status(409).send({

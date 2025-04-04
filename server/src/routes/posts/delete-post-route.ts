@@ -11,10 +11,10 @@ export const deletePostRoute: FastifyPluginAsyncZod = async (app) => {
         tags: ['posts'],
         description: 'Create Post',
         querystring: z.object({
-          postId: z.string()
+          id: z.string()
         }),
         response: {
-          204: z.null(),
+          204: z.object({}),
           409: z.object({
             error: errorSchema
           }),
@@ -27,11 +27,11 @@ export const deletePostRoute: FastifyPluginAsyncZod = async (app) => {
 
     async (request, reply) => {
       try {
-        const { postId } = request.query
+        const { id } = request.query
 
-        await deletePostService(postId)
+        await deletePostService(id)
 
-        return reply.status(204).send()
+        return reply.status(204).send({})
       } catch (e: any) {
         return reply.status(500).send({ error: e })
       }

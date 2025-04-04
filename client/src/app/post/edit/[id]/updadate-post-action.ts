@@ -28,7 +28,9 @@ export async function updadatePostAction(
       body: JSON.stringify(dto)
     })
 
-    await response.json()
+    if (!response.ok) {
+      throw new Error('Failed to fetch post')
+    }
 
     return { message: '', status: 'success' }
   } catch {
