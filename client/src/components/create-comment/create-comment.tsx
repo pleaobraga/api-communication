@@ -1,12 +1,9 @@
 'use client'
 
-import { useState } from 'react'
-import { toast } from 'sonner'
-
 import { Comment } from '@/@types'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { createCommentAction } from './create-comment-action'
+import { useCreateComment } from './use-create-comment'
 
 type Props = {
   postId: string
@@ -19,28 +16,8 @@ export function CreateComment({
   defaultComment = '',
   onSuccess
 }: Props) {
-  const [comment, setComment] = useState(defaultComment)
-  const [isLoading, setIsLoading] = useState(false)
-
-  const handleCreateComment = async () => {
-    if (comment === '') {
-      return
-    }
-
-    setIsLoading(true)
-
-    const { status, data } = await createCommentAction({ comment, postId })
-
-    setIsLoading(false)
-
-    if (status === 'error') {
-      toast.error('Request failed. Please try again')
-      return
-    }
-
-    toast.success('Comment created successfully')
-    onSuccess(data.comment)
-  }
+  const { comment, handleCreateComment, isLoading, setComment } =
+    useCreateComment({ postId, defaultComment, onSuccess })
 
   return (
     <div className="flex items-center gap-4">

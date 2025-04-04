@@ -1,30 +1,23 @@
 'use client'
 
-import { useState } from 'react'
-import dayjs from 'dayjs'
 import { FaPencil } from 'react-icons/fa6'
 
 import { Comment as CommentType } from '@/@types'
 import { Button } from '@/components/ui/button'
 import { DeleteButton } from './components/delete-button'
 import { CreateComment } from '../create-comment'
+import { useComment } from './useComment'
 
-type Props = CommentType
+type Props = Omit<CommentType, 'createdAt'>
 
 export function Comment({ content, id, lastUpdate, postId }: Props) {
-  const [newContent, setNewContent] = useState(content)
-  const [isEditMode, setIsEditMode] = useState(false)
-
-  const formattedLastUpdate = dayjs(lastUpdate).format('MMM YYYY')
-
-  const handleEdit = () => {
-    setIsEditMode(true)
-  }
-
-  const handleRejectChanges = () => {
-    setNewContent(content)
-    setIsEditMode(false)
-  }
+  const {
+    formattedLastUpdate,
+    handleEdit,
+    handleRejectChanges,
+    isEditMode,
+    newContent
+  } = useComment({ content, id, lastUpdate, postId })
 
   if (isEditMode) {
     return (

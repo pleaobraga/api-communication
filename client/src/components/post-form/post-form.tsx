@@ -1,10 +1,7 @@
 'use client'
 
-import { zodResolver } from '@hookform/resolvers/zod'
-import React, { useActionState, useRef } from 'react'
-import { useRouter } from 'next/navigation'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
+import React from 'react'
+
 import { FaXmark } from 'react-icons/fa6'
 
 import { Input } from '@/components/ui/input'
@@ -18,9 +15,8 @@ import {
 } from '@/components/ui/form'
 import { EditorContent } from '../editor-content'
 import { Button } from '../ui/button'
-import { postFormSchema } from './post-form.schema'
 import { FormState } from './post-form-validation-action'
-import { useReturnAPIToast } from '@/hooks/useReturnAPIToast'
+import { usePostForm } from './use-post-form'
 
 type Props = {
   content?: string
@@ -31,8 +27,6 @@ type Props = {
   successMessage: string
 }
 
-type PostFormType = z.infer<typeof postFormSchema>
-
 export function PostForm({
   content = '',
   title = '',
@@ -41,34 +35,15 @@ export function PostForm({
   serverAction,
   successMessage
 }: Props) {
-  const router = useRouter()
-  const formRef = useRef<HTMLFormElement>(null)
-
-  const [state, formAction, isPending] = useActionState(serverAction, {
-    message: ''
-  })
-
-  const handleBack = () => {
-    router.back()
-  }
-
-  useReturnAPIToast({
-    status: state.status,
-    successMessage,
-    onSuccessCallBack: handleBack,
-    isPendingAction: isPending
-  })
-
-  const form = useForm<PostFormType>({
-    resolver: zodResolver(postFormSchema),
-    defaultValues: {
-      id: id ?? '',
-      title,
-      description: description || '',
-      content: content || '',
-      ...(state?.fields ?? {})
-    }
-  })
+  const { handleBack, form, formAction, formRef, state, isPending } =
+    usePostForm({
+      serverAction,
+      successMessage,
+      content,
+      description,
+      id,
+      title
+    })
 
   return (
     <>
@@ -172,10 +147,16 @@ export function PostForm({
               onClick={form.handleSubmit(() => {
                 formRef.current?.requestSubmit()
               })}
+              disabled={isPending}
             >
-              Save
+              {isPending ? 'Loading...' : 'Save'}
             </Button>
-            <Button variant="outline" type="button" onClick={handleBack}>
+            <Button
+              variant="outline"
+              type="button"
+              onClick={handleBack}
+              disabled={isPending}
+            >
               Cancel
             </Button>
           </div>
