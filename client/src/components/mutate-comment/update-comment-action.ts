@@ -1,5 +1,7 @@
 'use server'
 
+import { updateCommentAPI } from '@/api'
+
 type Props = {
   id: string
   comment: string
@@ -11,19 +13,7 @@ export async function updateCommentAction({ comment, id }: Props) {
       content: comment
     }
 
-    const response = await fetch(`http://localhost:3002/comments?id=${id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(dto)
-    })
-
-    if (!response.ok) {
-      throw new Error('Failed to update comment')
-    }
-
-    const data = await response.json()
+    const data = await updateCommentAPI(id, dto)
 
     return { message: '', status: 'success', data }
   } catch (e) {
