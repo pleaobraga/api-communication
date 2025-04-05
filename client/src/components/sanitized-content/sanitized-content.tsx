@@ -5,10 +5,10 @@ import sanitizeHtml from 'sanitize-html'
 
 type Props = {
   content: string
-  classname?: string
+  className?: string
 }
 
-export function SanitizedContent({ content, classname = '' }: Props) {
+export function SanitizedContent({ content, className = '' }: Props) {
   const sanitizedHtml = sanitizeHtml(content, {
     allowedTags: ['b', 'i', 'em', 'strong', 'a', 'p', 'div', 'h1', 'h2', 'h3'],
     allowedAttributes: { a: ['href'] }
@@ -16,7 +16,7 @@ export function SanitizedContent({ content, classname = '' }: Props) {
 
   return (
     <div
-      className={cn('prose', classname)}
+      className={cn('prose  w-full max-w-full', className)}
       dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
     />
   )
