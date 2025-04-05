@@ -45,11 +45,14 @@ export async function getPostAPI(id?: string) {
         id
         title
         description
-        createdAt
         content
+        lastUpdate
         comments {
           id
           content
+          lastUpdate
+          createdAt
+          postId
         }
       }
     }

@@ -11,7 +11,15 @@ export async function getPostService() {
       description: posts.description,
       createdAt: posts.createdAt,
       lastUpdate: posts.lastUpdate,
-      comments: sql`COALESCE(json_agg(${comments}) FILTER (WHERE ${comments.id} IS NOT NULL), '[]')`
+      comments: sql<string>`COALESCE(
+        json_agg(json_build_object(
+          'id', ${comments.id},
+          'postId', ${comments.postId},
+          'content', ${comments.content},
+          'createdAt', ${comments.createdAt},
+          'lastUpdate', ${comments.lastUpdate}
+        )) FILTER (WHERE ${comments.id} IS NOT NULL), '[]'
+      )`
     })
     .from(posts)
     .leftJoin(comments, eq(comments.postId, posts.id))
