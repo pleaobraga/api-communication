@@ -1,7 +1,9 @@
-export { updateCommentAPI, deleteCommentAPI } from './comment-api'
+export { updateCommentAPI, deleteCommentAPI } from './rest/comment-rest-api'
 export {
   updatePostAPI,
   createPostAPI,
   deletePostAPI,
   getPostAPI
-} from './post-api'
+} from './rest/post-rest-api'
+
+export { clientAPI } from './client-api'

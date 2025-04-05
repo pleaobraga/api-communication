@@ -59,7 +59,7 @@ export function useMutateComment({
     }
 
     toast.success('Comment updated successfully')
-    onSuccess(data.comment)
+    onSuccess(data?.comment)
   }
 
   return {

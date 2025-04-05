@@ -2,7 +2,7 @@ const HEADERS = {
   'Content-Type': 'application/json'
 }
 
-export function apiClient() {
+export function apiRestClient() {
   async function get(url: string): Promise<any> {
     const response = await fetch(url)
 

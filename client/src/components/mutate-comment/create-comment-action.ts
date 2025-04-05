@@ -1,6 +1,6 @@
 'use server'
 
-import { createCommentAPI } from '@/api/comment-api'
+import { createCommentAPI } from '@/api/rest/comment-rest-api'
 
 type Props = {
   postId: string

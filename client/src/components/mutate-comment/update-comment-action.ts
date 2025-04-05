@@ -1,6 +1,6 @@
 'use server'
 
-import { updateCommentAPI } from '@/api'
+import { clientAPI } from '@/api'
 
 type Props = {
   id: string
@@ -13,7 +13,7 @@ export async function updateCommentAction({ comment, id }: Props) {
       content: comment
     }
 
-    const data = await updateCommentAPI(id, dto)
+    const data = await clientAPI.updateCommentAPI(id, dto)
 
     return { message: '', status: 'success', data }
   } catch (e) {
