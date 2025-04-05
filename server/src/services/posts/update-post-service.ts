@@ -35,7 +35,7 @@ export async function updatePostService({
     title,
     content,
     description,
-    updatedAt: new Date()
+    lastUpdate: new Date()
   }
 
   const [post] = await db
