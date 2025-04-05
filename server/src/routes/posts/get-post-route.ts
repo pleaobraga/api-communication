@@ -12,7 +12,7 @@ export const getPostRoute: FastifyPluginAsyncZod = async (app) => {
         tags: ['posts'],
         description: 'Get Post',
         querystring: z.object({
-          postId: z.string().optional()
+          id: z.string().optional()
         }),
         response: {
           200: z.object({
@@ -27,14 +27,14 @@ export const getPostRoute: FastifyPluginAsyncZod = async (app) => {
 
     async (request, reply) => {
       try {
-        if (request.query.postId) {
-          const posts = await getSinglePostService(request.query.postId)
-          return reply.status(201).send({ posts })
+        if (request.query.id) {
+          const posts = await getSinglePostService(request.query.id)
+          return reply.status(200).send({ posts })
         }
 
         const posts = await getPostService()
 
-        return reply.status(201).send({ posts })
+        return reply.status(200).send({ posts })
       } catch (e: any) {
         return reply.status(500).send({ error: e })
       }

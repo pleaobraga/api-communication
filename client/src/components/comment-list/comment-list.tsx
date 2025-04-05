@@ -8,13 +8,13 @@ type Props = {
 }
 
 export function CommentList({
-  comments,
+  comments = [],
   handleDeleteSuccess,
   handleUpdatedSuccess
 }: Props) {
   return (
     <div className="flex flex-col gap-6">
-      {comments.map(({ content, id, lastUpdate, postId }) => (
+      {comments?.map(({ content, id, lastUpdate, postId }) => (
         <Comment
           key={id}
           id={id}
