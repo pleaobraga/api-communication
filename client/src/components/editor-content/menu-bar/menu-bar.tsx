@@ -100,45 +100,6 @@ export function MenuBar({ editor }: Props) {
       >
         Highlight
       </Button>
-      <Button
-        variant="outline"
-        type="button"
-        size="sm"
-        onClick={() => editor.chain().focus().setTextAlign('left').run()}
-        className={
-          editor.isActive({ textAlign: 'left' })
-            ? 'bg-slate-600 text-white '
-            : ''
-        }
-      >
-        Left
-      </Button>
-      <Button
-        variant="outline"
-        type="button"
-        size="sm"
-        onClick={() => editor.chain().focus().setTextAlign('center').run()}
-        className={
-          editor.isActive({ textAlign: 'center' })
-            ? 'bg-slate-600 text-white '
-            : ''
-        }
-      >
-        Center
-      </Button>
-      <Button
-        variant="outline"
-        type="button"
-        size="sm"
-        onClick={() => editor.chain().focus().setTextAlign('right').run()}
-        className={
-          editor.isActive({ textAlign: 'right' })
-            ? 'bg-slate-600 text-white '
-            : ''
-        }
-      >
-        Right
-      </Button>
     </div>
   )
 }
