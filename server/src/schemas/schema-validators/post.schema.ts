@@ -6,5 +6,6 @@ export const postSchema = z.object({
   content: z.string(),
   description: z.string().nullable(),
   createdAt: z.date(),
-  lastUpdate: z.date()
+  lastUpdate: z.date(),
+  comments: z.unknown()
 })
