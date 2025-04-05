@@ -27,17 +27,17 @@ export function PostListItem({
         'hover:bg-slate-100'
       )}
     >
-      <div className="flex items-center justify-center p-4 bg-gray-200 rounded-xl">
+      <div className="items-center justify-center p-4 bg-gray-200 rounded-xl hidden md:flex">
         <FaRegFileLines className="w-6 h-6" />
       </div>
-      <div className="flex justify-between gap-4 w-full">
+      <div className="flex justify-between flex-col md:flex-row md:gap-4 w-full">
         <div className="flex flex-col">
           <h1 className="text-lg font-medium">{title}</h1>
           <span className="line-clamp-1 text-slate-400 font-normal">
             {description}
           </span>
         </div>
-        <div className="flex flex-col justify-center items-end min-w-20">
+        <div className="flex gap-4 md:gap-0 md:flex-col md:justify-center md:items-end min-w-20">
           <div className="flex gap-1 items-center justify-center font-light">
             {formattedLastUpdate}
           </div>

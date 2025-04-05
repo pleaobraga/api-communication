@@ -15,7 +15,7 @@ export default async function Home() {
   const posts = await res.json()
 
   return (
-    <div className="flex flex-col gap-7 lg:mx-20 mx-8">
+    <>
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold">All Posts</h1>
         <Button variant="secondary" size="sm" asChild>
@@ -24,6 +24,6 @@ export default async function Home() {
       </div>
 
       <PostList posts={posts.posts} />
-    </div>
+    </>
   )
 }

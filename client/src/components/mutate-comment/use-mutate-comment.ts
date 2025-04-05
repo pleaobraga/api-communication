@@ -9,7 +9,6 @@ type Props = {
   postId: string
   defaultComment: string
   onSuccess: (comment: Comment) => void
-  isEdition?: boolean
   id?: string
 }
 
@@ -17,8 +16,7 @@ export function useMutateComment({
   id = '',
   postId,
   onSuccess,
-  defaultComment,
-  isEdition
+  defaultComment
 }: Props) {
   const [comment, setComment] = useState(defaultComment)
   const [isLoading, setIsLoading] = useState(false)
@@ -40,6 +38,7 @@ export function useMutateComment({
     }
 
     toast.success('Comment created successfully')
+    setComment('')
     onSuccess(data.comment)
   }
 
