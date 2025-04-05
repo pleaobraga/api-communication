@@ -1,5 +1,6 @@
 'use server'
 
+import { createPostAPI } from '@/api'
 import { FormState } from '@/components/post-form'
 
 export async function createPostAction(
@@ -8,22 +9,12 @@ export async function createPostAction(
 ): Promise<FormState> {
   try {
     const dto = {
-      title: data.get('title'),
-      description: data.get('description'),
-      content: data.get('content')
+      title: data.get('title')?.toString(),
+      description: data.get('description')?.toString(),
+      content: data.get('content')?.toString()
     }
 
-    const response = await fetch(`http://localhost:3002/posts`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(dto)
-    })
-
-    if (!response.ok) {
-      throw new Error('Failed to fetch post')
-    }
+    await createPostAPI(dto)
 
     return { message: '', status: 'success' }
   } catch (e) {

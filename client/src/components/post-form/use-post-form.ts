@@ -47,7 +47,7 @@ export function usePostForm({
   })
 
   const handleRedirect = () => {
-    const url = id ? `/post/${id}` : '/post'
+    const url = id ? `/post/${id}` : '/'
     router.push(url)
   }
 

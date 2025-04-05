@@ -1,3 +1,4 @@
+import { getPostAPI } from '@/api'
 import { CommentsSection } from '@/components/comments-section'
 import { PostDetail } from '@/components/post-detail'
 
@@ -8,12 +9,7 @@ type Props = {
 export default async function postDetail({ params }: Props) {
   const { id } = await params
 
-  const response = await fetch(`http://localhost:3002/posts?postId=${id}`)
-  const { posts } = await response.json()
-
-  if (!posts) {
-    return <div>Post not found</div>
-  }
+  const { posts } = await getPostAPI(id)
 
   const [post] = posts
 
