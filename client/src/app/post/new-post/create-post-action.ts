@@ -1,17 +1,11 @@
 'use server'
 
-import { FormState, formValidationAction } from '@/components/post-form'
+import { FormState } from '@/components/post-form'
 
 export async function createPostAction(
   prevState: FormState,
   data: FormData
 ): Promise<FormState> {
-  const validation = await formValidationAction(prevState, data)
-
-  if (validation.status !== 'success') {
-    return validation
-  }
-
   try {
     const dto = {
       title: data.get('title'),

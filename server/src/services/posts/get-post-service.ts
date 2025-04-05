@@ -16,6 +16,7 @@ export async function getPostService() {
     .from(posts)
     .leftJoin(comments, eq(comments.postId, posts.id))
     .groupBy(posts.id)
+    .orderBy(posts.lastUpdate)
 
   return postslist
 }
