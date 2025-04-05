@@ -1,6 +1,6 @@
 'use server'
 
-import { deleteCommentAPI } from '@/api'
+import { clientAPI } from '@/api'
 
 type Props = {
   id: string
@@ -10,7 +10,7 @@ export async function deleteCommentAction({
   id
 }: Props): Promise<{ message: string; status: 'error' | 'success' }> {
   try {
-    await deleteCommentAPI(id)
+    await clientAPI.deleteCommentAPI(id)
 
     return { message: '', status: 'success' }
   } catch {

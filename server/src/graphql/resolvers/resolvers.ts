@@ -9,10 +9,15 @@ import { getSinglePostService } from '../../services/posts/get-single-post-servi
 
 export const GraphQLResolvers = {
   Query: {
-    getPost: async (_: any, { id }: { id: string }) =>
-      await getSinglePostService(id),
+    getPosts: async (_: any, { id }: { id: string }) => {
+      if (id) {
+        const response = await getSinglePostService(id)
+        return response
+      }
 
-    getPosts: async () => await getPostService()
+      const response = await getPostService()
+      return response
+    }
   },
   Mutation: {
     createPost: async (

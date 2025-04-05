@@ -1,6 +1,6 @@
 import { PostForm } from '@/components/post-form'
 import { updadatePostAction } from './updadate-post-action'
-import { getPostAPI } from '@/api'
+import { clientAPI } from '@/api'
 import { PageHeader } from '@/components/page-header'
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
 export default async function UpdatePostPage({ params }: Props) {
   const { id } = await params
 
-  const { posts } = await getPostAPI(id)
+  const { posts } = await clientAPI.getPostAPI(id)
 
   if (!posts) {
     return <div>Post not found</div>

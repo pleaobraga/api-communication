@@ -1,6 +1,5 @@
-import { getPostAPI } from '@/api'
+import { clientAPI } from '@/api'
 import { CommentsSection } from '@/components/comments-section'
-import { PageHeader } from '@/components/page-header'
 import { PostDetail } from '@/components/post-detail'
 
 type Props = {
@@ -10,7 +9,7 @@ type Props = {
 export default async function postDetail({ params }: Props) {
   const { id } = await params
 
-  const { posts } = await getPostAPI(id)
+  const { posts } = await clientAPI.getPostAPI(id)
 
   const [post] = posts
 

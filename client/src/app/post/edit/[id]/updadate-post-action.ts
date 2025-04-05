@@ -1,6 +1,6 @@
 'use server'
 
-import { updatePostAPI } from '@/api'
+import { clientAPI } from '@/api'
 import { FormState } from '@/components/post-form'
 
 export async function updadatePostAction(
@@ -17,7 +17,7 @@ export async function updadatePostAction(
       content: data.get('content')?.toString()
     }
 
-    await updatePostAPI(id, dto)
+    await clientAPI.updatePostAPI(id, dto)
 
     return { message: '', status: 'success' }
   } catch {

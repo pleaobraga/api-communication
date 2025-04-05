@@ -8,6 +8,7 @@ export const GraphQLSchema = `
     description: String
     createdAt: Date!
     lastUpdate: Date!
+    comments: [Comment]
   }
 
   type Comment {
@@ -16,18 +17,16 @@ export const GraphQLSchema = `
     content: String!
     createdAt: Date!
     lastUpdate: Date!
-    comments: [Comment!]
     commentsCount: Int!
   }
 
   type Query {
-    getPost(id: ID!): Post
-    getPosts: [Post]
+    getPosts(id: ID): [Post]
   }
 
   type Mutation {
-    createPost(title: String!, content: String!): Post
-    updatePost(id: ID!, title: String!, content: String!): Post
+    createPost(title: String!, description: String ,content: String!): Post
+    updatePost(id: ID!, title: String!, description: String, content: String!): Post
     deletePost(id: ID!): Boolean
 
     createComment(postId: ID!, content: String!): Comment

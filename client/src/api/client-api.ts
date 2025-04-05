@@ -1,12 +1,22 @@
-import { Comment } from '@/@types'
+import { Comment, Post } from '@/@types'
 import { graphQLAPI } from './graphql'
 import { restAPI } from './rest'
 
 type APIImplementation = {
-  updateCommentAPI: (
+  updateCommentAPI(
     id: string,
     dto: { content: string }
-  ) => Promise<{ comment: Comment }>
+  ): Promise<{ comment: Comment }>
+  deleteCommentAPI(id: string): Promise<void>
+  createCommentAPI(dto: {
+    postId: string
+    content: string
+  }): Promise<{ comment: Comment }>
+  updatePostAPI(
+    id: string,
+    dto: { id?: string; title?: string; description?: string; content?: string }
+  ): Promise<Post>
+  getPostAPI(id?: string): Promise<{ posts: Post[] }>
 }
 
 type CommunicationType = 'rest' | 'graphQL'

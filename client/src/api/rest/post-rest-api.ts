@@ -1,9 +1,10 @@
+import { Post } from '@/@types'
 import { apiRestClient } from './api-rest-client'
 
 export async function updatePostAPI(
   id: string,
   dto: { id?: string; title?: string; description?: string; content?: string }
-) {
+): Promise<Post> {
   const url = `${process.env.REST_BASE_URL}/posts?id=${id}`
   const data = await apiRestClient().put(url, dto)
   return data

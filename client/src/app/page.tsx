@@ -1,10 +1,10 @@
-import { getPostAPI } from '@/api'
+import { clientAPI } from '@/api'
 import { PostList } from '@/components/post-list'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 
 export default async function Home() {
-  const posts = await getPostAPI()
+  const posts = await clientAPI.getPostAPI()
 
   return (
     <>

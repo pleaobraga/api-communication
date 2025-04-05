@@ -43,11 +43,29 @@ export async function deleteCommentAPI(id: string) {
   })
 }
 
-// export async function createCommentAPI(dto: {
-//   postId: string
-//   content: string
-// }) {
-//   const url = `${process.env.REST_BASE_URL}/comments`
-//   const data = await apiRestClient().post(url, dto)
-//   return data
-// }
+export async function createCommentAPI(dto: {
+  postId: string
+  content: string
+}) {
+  const mutation = gql`
+    mutation createComment($postId: ID!, $content: String!) {
+      createComment(postId: $postId, content: $content) {
+        id
+        postId
+        content
+        lastUpdate
+      }
+    }
+  `
+
+  const { data } = await apoloClient.mutate({
+    mutation,
+    variables: {
+      postId: dto.postId,
+      content: dto.content
+    },
+    fetchPolicy: 'no-cache'
+  })
+
+  return { comment: data.createComment }
+}
