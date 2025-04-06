@@ -39,7 +39,7 @@ export function useMutateComment({
 
     toast.success('Comment created successfully')
     setComment('')
-    onSuccess(data.comment)
+    data && onSuccess(data.comment)
   }
 
   const handleUpdateComment = async () => {
@@ -59,7 +59,7 @@ export function useMutateComment({
     }
 
     toast.success('Comment updated successfully')
-    onSuccess(data?.comment)
+    data && onSuccess(data?.comment)
   }
 
   return {
