@@ -85,12 +85,32 @@ export async function deletePostAPI(id: string) {
   })
 }
 
-// export async function createPostAPI(dto: {
-//   title?: string
-//   description?: string
-//   content?: string
-// }) {
-//   const url = `${process.env.REST_BASE_URL}/posts`
-//   const data = await apiRestClient().post(url, dto)
-//   return data
-// }
+export async function createPostAPI(dto: {
+  title?: string
+  description?: string
+  content?: string
+}) {
+  const mutation = gql`
+    mutation createPost(
+      $title: String!
+      $description: String
+      $content: String!
+    ) {
+      createPost(title: $title, description: $description, content: $content) {
+        id
+      }
+    }
+  `
+
+  const { data } = await apoloClient.mutate({
+    mutation,
+    variables: {
+      title: dto.title,
+      description: dto.description ?? '',
+      content: dto.content
+    },
+    fetchPolicy: 'no-cache'
+  })
+
+  return { ...data.updatePost }
+}

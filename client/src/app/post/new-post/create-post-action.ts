@@ -1,6 +1,6 @@
 'use server'
 
-import { createPostAPI } from '@/api'
+import { clientAPI } from '@/api'
 import { FormState } from '@/components/post-form'
 
 export async function createPostAction(
@@ -14,7 +14,7 @@ export async function createPostAction(
       content: data.get('content')?.toString()
     }
 
-    await createPostAPI(dto)
+    await clientAPI.createPostAPI(dto)
 
     return { message: '', status: 'success' }
   } catch (e) {
