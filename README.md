@@ -81,12 +81,6 @@ $ pnpm run dev
 
 Access the application at `http://localhost:3000`
 
-## Available Scripts
-
-- `pnpm run dev` - Runs the application in development mode.
-- `pnpm run build` - Builds the application for production.
-- `pnpm run start` - Runs the application in production mode.
-
 ## Database
 
 - Drizzle ORM is used for defining and interacting with the database schema.

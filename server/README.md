@@ -57,8 +57,8 @@ Configuration settings are managed using environment variables. Create a `.env` 
 ```env
 ENV=development
 DATABASE_URL=postgres://user:password@localhost:5432/database_name
-REST_PORT=3000
-GRAPHQL_PORT=4000
+REST_PORT=3002
+GRAPHQL_PORT=3001
 ```
 
 Replace `user`, `password`, and `database_name` with your actual database credentials.
@@ -100,10 +100,10 @@ The server also exposes a GraphQL endpoint at `/graphql`. The available queries 
   - `getPosts(id: ID): [Post]`
 
 - **Mutations:**
+
   - `createPost(title: String!, description: String ,content: String!): Post`
   - `updatePost(id: ID!, title: String!, description: String, content: String!): Post`
   - `deletePost(id: ID!): Boolean`
-  
   - `createComment(postId: ID!, content: String!): Comment`
   - `updateComment(id: ID!, content: String!): Comment`
   - `deleteComment(id: ID!): Boolean`
