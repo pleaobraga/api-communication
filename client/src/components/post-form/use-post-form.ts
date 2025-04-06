@@ -1,10 +1,11 @@
-import { useReturnAPIToast } from '@/hooks/useReturnAPIToast'
+import { useReturnAPIToast } from '@/hooks/use-return-api-toast'
 import { useActionState, useRef } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { postFormSchema } from './post-form.schema'
 import { z } from 'zod'
 import { useRouter } from 'next/navigation'
+import { sanitizeText } from '@/lib/utils'
 
 export type FormState = {
   message: string
@@ -74,7 +75,10 @@ export function usePostForm({
   })
 
   const handleAction = (formData: FormData) => {
-    formData.set('content', editorRef.current?.getContent() || '')
+    const contentValue = editorRef.current?.getContent() ?? ''
+    const sanitizeContent = sanitizeText(contentValue)
+
+    formData.set('content', sanitizeContent)
     formAction(formData)
   }
 

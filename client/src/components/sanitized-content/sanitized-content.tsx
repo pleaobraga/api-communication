@@ -1,7 +1,6 @@
 'use client'
 
-import { cn } from '@/lib/utils'
-import sanitizeHtml from 'sanitize-html'
+import { cn, sanitizeText } from '@/lib/utils'
 
 type Props = {
   content: string
@@ -9,10 +8,7 @@ type Props = {
 }
 
 export function SanitizedContent({ content, className = '' }: Props) {
-  const sanitizedHtml = sanitizeHtml(content, {
-    allowedTags: ['b', 'i', 'em', 'strong', 'a', 'p', 'div', 'h1', 'h2', 'h3'],
-    allowedAttributes: { a: ['href'] }
-  })
+  const sanitizedHtml = sanitizeText(content)
 
   return (
     <div
