@@ -54,7 +54,7 @@ export function Comment({
   return (
     <div className="flex gap-4 group justify-between">
       <div className="flex flex-col gap-1 font-normal text-sm">
-        <p>{content}</p>
+        <p className="italic">{content}</p>
         <span className="text-slate-500">{formattedLastUpdate}</span>
       </div>
       <div className="flex gap-1 invisible group-hover:visible">
