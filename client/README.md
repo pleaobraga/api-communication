@@ -6,6 +6,8 @@ This project is a web post platform where users can create, edit, list, and dele
 
 The project is built following **SOLID principles** to ensure maintainable, extensible, and testable code. It utilizes **ShadCN and Tailwind CSS** for styling, resulting in a clean, responsive, and highly customizable UI.
 
+The design was created using the IA tool [**Galileo.ai**](https://www.usegalileo.ai/), providing a sleek and modern user interface.
+
 ## Features
 
 - **Storybook Integration:**  
@@ -34,8 +36,10 @@ The project is built following **SOLID principles** to ensure maintainable, exte
 - **`src/`**: The main source directory containing:
   - **`app/`**: Includes the main application components and pages.
   - **`components/`**: Reusable UI components used across the application.
-  - **`styles/`**: Global and component-specific stylesheets.
-
+  - **`lib/`**: Utility functions and libraries for various functionalities.
+  - **`hooks/`**: Custom React hooks for state and logic management.
+  - **`api/`**: API request and data fetching logic.
+  - **`@types/`**: TypeScript type definitions and interfaces.
 
 ## Available Scripts
 
@@ -77,7 +81,6 @@ GRAPHQL_BASE_URL=http://localhost:3001
 ```
 
 Changing `API_COMMUNICATION` will determine which API the client consumes.
-
 
 ## Further Improvements
 
