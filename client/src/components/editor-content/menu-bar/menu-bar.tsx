@@ -13,6 +13,56 @@ export function MenuBar({ editor }: Props) {
   return (
     <div className="flex gap-2 flex-wrap py-2 pr-2">
       <Button
+        type="button"
+        variant="outline"
+        size="sm"
+        onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
+        className={
+          editor.isActive('heading', { level: 1 })
+            ? 'bg-slate-600 text-white '
+            : ''
+        }
+      >
+        H1
+      </Button>
+      <Button
+        variant="outline"
+        type="button"
+        size="sm"
+        onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
+        className={
+          editor.isActive('heading', { level: 2 })
+            ? 'bg-slate-600 text-white '
+            : ''
+        }
+      >
+        H2
+      </Button>
+      <Button
+        variant="outline"
+        type="button"
+        size="sm"
+        onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
+        className={
+          editor.isActive('heading', { level: 3 })
+            ? 'bg-slate-600 text-white '
+            : ''
+        }
+      >
+        H3
+      </Button>
+      <Button
+        variant="outline"
+        type="button"
+        size="sm"
+        onClick={() => editor.chain().focus().setParagraph().run()}
+        className={
+          editor.isActive('paragraph') ? 'bg-slate-600 text-white ' : ''
+        }
+      >
+        Paragraph
+      </Button>
+      <Button
         variant="outline"
         type="button"
         size="sm"
