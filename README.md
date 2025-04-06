@@ -28,8 +28,7 @@ The project is a **Post Web Application** where users can:
 ```
 - client/  (Frontend application)
 - server/  (Backend application)
-- .vscode/ (Project configuration files)
-- docker-compose.yml (Docker setup for PostgreSQL)
+- .vscode/ (Project configuration for debug Backend application)
 ```
 
 ### Technologies Used
