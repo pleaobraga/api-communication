@@ -23,13 +23,7 @@ export function EditorContent({
   onChange
 }: Props) {
   const editor = useEditor({
-    extensions: [
-      StarterKit,
-      TextAlign.configure({
-        types: ['heading', 'paragraph']
-      }),
-      Highlight
-    ],
+    extensions: [StarterKit, Highlight],
     editorProps: {
       attributes: {
         class: cn(

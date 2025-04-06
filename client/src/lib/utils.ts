@@ -8,6 +8,6 @@ export function cn(...inputs: ClassValue[]) {
 
 export const sanitizeText = (text: string) =>
   sanitizeHtml(text, {
-    allowedTags: ['b', 'i', 'em', 'strong', 'a', 'p', 'div', 'h1', 'h2', 'h3'],
+    allowedTags: ['b', 'i', 'em', 'strong', 'a', 'p', 'div', 's', 'mark'],
     allowedAttributes: { a: ['href'] }
   })
