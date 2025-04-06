@@ -34,6 +34,7 @@ export function usePostForm({
 }: Props) {
   const router = useRouter()
   const formRef = useRef<HTMLFormElement>(null)
+  const editorRef = useRef<{ getContent: () => string } | null>(null)
 
   const enhancedServerAction = async (prevState: FormState, data: FormData) => {
     if (id) {
@@ -72,12 +73,18 @@ export function usePostForm({
     }
   })
 
+  const handleAction = (formData: FormData) => {
+    formData.set('content', editorRef.current?.getContent() || '')
+    formAction(formData)
+  }
+
   return {
     formRef,
-    formAction,
     state,
     form,
     handleBack,
-    isPending
+    isPending,
+    editorRef,
+    handleAction
   }
 }

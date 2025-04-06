@@ -32,18 +32,19 @@ export function PostForm({
   serverAction,
   successMessage
 }: Props) {
-  const { handleBack, form, formAction, formRef, isPending } = usePostForm({
-    serverAction,
-    successMessage,
-    content,
-    description,
-    id,
-    title
-  })
+  const { handleBack, form, handleAction, formRef, isPending, editorRef } =
+    usePostForm({
+      serverAction,
+      successMessage,
+      content,
+      description,
+      id,
+      title
+    })
 
   return (
     <Form {...form}>
-      <form ref={formRef} action={formAction} className="flex flex-col gap-6">
+      <form ref={formRef} action={handleAction} className="flex flex-col gap-6">
         <div>
           <FormField
             control={form.control}
@@ -80,19 +81,16 @@ export function PostForm({
           <FormField
             control={form.control}
             name="content"
-            render={({ field: { onChange, value }, fieldState: { error } }) => (
+            render={({ field: { value }, fieldState: { error } }) => (
               <FormItem className="w-full">
                 <FormLabel>Post Content</FormLabel>
                 <FormControl>
                   <div>
                     <EditorContent
                       content={value}
-                      onChange={onChange}
                       hasError={!!error}
+                      editorRef={editorRef}
                     />
-
-                    {/* Hidden input to ensure content is sent when JavaScript is disabled */}
-                    <input type="hidden" name="content" value={value} />
                   </div>
                 </FormControl>
                 <FormMessage />

@@ -11,11 +11,11 @@ import { useEffect } from 'react'
 
 type Props = {
   content?: string
-  onChange(body: string): void
   hasError?: boolean
+  editorRef: React.MutableRefObject<{ getContent: () => string } | null>
 }
 
-export function EditorContent({ content, onChange, hasError }: Props) {
+export function EditorContent({ content, hasError, editorRef }: Props) {
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -35,17 +35,22 @@ export function EditorContent({ content, onChange, hasError }: Props) {
         )
       }
     },
-    onUpdate({ editor }) {
-      const value = editor.getHTML()
-      onChange(value)
-    },
     immediatelyRender: typeof window !== 'undefined'
   })
 
   useEffect(() => {
-    editor?.commands.setContent(content as string)
+    if (editor && content) {
+      editor.commands.setContent(content)
+    }
   }, [content, editor])
 
+  useEffect(() => {
+    if (editor) {
+      editorRef.current = {
+        getContent: () => editor.getHTML() || ''
+      }
+    }
+  }, [editor, editorRef])
   return (
     <div>
       <MenuBar editor={editor} />
