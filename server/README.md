@@ -96,14 +96,14 @@ The server provides the following RESTful endpoints:
 The server also exposes a GraphQL endpoint at `/graphql`. The available queries and mutations include:
 
 - **Queries:**
-  - `getPost(id: ID!): Post`
-  - `getPosts: [Post]`
-  - `getComments(postId: ID!): [Comment]`
+
+  - `getPosts(id: ID): [Post]`
 
 - **Mutations:**
-  - `createPost(title: String!, content: String!): Post`
-  - `updatePost(id: ID!, title: String!, content: String!): Post`
+  - `createPost(title: String!, description: String ,content: String!): Post`
+  - `updatePost(id: ID!, title: String!, description: String, content: String!): Post`
   - `deletePost(id: ID!): Boolean`
+  
   - `createComment(postId: ID!, content: String!): Comment`
   - `updateComment(id: ID!, content: String!): Comment`
   - `deleteComment(id: ID!): Boolean`
