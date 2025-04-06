@@ -12,7 +12,7 @@ import { useEffect } from 'react'
 type Props = {
   content?: string
   hasError?: boolean
-  editorRef: React.MutableRefObject<{ getContent: () => string } | null>
+  editorRef?: React.MutableRefObject<{ getContent: () => string } | null>
   onChange?: (value: string) => void
 }
 
@@ -48,7 +48,7 @@ export function EditorContent({
   }, [content, editor])
 
   useEffect(() => {
-    if (editor) {
+    if (editor && editorRef) {
       editorRef.current = {
         getContent: () => editor.getHTML() || ''
       }

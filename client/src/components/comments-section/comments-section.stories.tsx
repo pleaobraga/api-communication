@@ -1,20 +1,19 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { CommentList } from '.'
+import { CommentsSection } from '.'
 import { generateFakeComment } from '@/mocks/comment.mock'
 
-const meta: Meta<typeof CommentList> = {
-  title: 'Components/Comment/Comment List',
-  component: CommentList,
+const meta: Meta<typeof CommentsSection> = {
+  title: 'Components/Comment/Comments Section',
+  component: CommentsSection,
   args: {
-    handleDeleteSuccess: () => {},
-    handleUpdatedSuccess: () => {}
+    postId: '1'
   },
   tags: ['autodocs']
 }
 
 export default meta
 
-type Story = StoryObj<typeof CommentList>
+type Story = StoryObj<typeof CommentsSection>
 
 const comment1 = generateFakeComment()
 const comment2 = generateFakeComment()

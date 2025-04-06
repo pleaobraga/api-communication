@@ -5,7 +5,11 @@ import { generateFakeComment } from '@/mocks/comment.mock'
 const meta: Meta<typeof Comment> = {
   title: 'Components/Comment/Comment',
   component: Comment,
-  args: generateFakeComment(),
+  args: {
+    ...generateFakeComment(),
+    handleDeleteSuccess: () => {},
+    handleUpdatedSuccess: () => {}
+  },
   tags: ['autodocs']
 }
 
