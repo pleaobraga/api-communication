@@ -81,15 +81,16 @@ export function PostForm({
           <FormField
             control={form.control}
             name="content"
-            render={({ field: { value }, fieldState: { error } }) => (
+            render={({ field: { onChange }, fieldState: { error } }) => (
               <FormItem className="w-full">
                 <FormLabel>Post Content</FormLabel>
                 <FormControl>
                   <div>
                     <EditorContent
-                      content={value}
+                      content={content}
                       hasError={!!error}
                       editorRef={editorRef}
+                      onChange={onChange}
                     />
                   </div>
                 </FormControl>

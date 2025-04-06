@@ -13,17 +13,17 @@ export function PostDetail({ id, content, lastUpdate, title }: Props) {
 
   return (
     <div className={'w-full flex flex-col gap-4'}>
-      <div className="">
-        <h1 className="text-3xl font-bold">{title}</h1>
-        <span className="text-sm font-regular text-slate-500">
-          {formattedLastUpdate}
-        </span>
-      </div>
       <div className="flex gap-2 mb-5">
         <Button size="sm" asChild>
           <Link href={`/post/edit/${id}`}>Edit Post</Link>
         </Button>
         <DeleteButton id={id} />
+      </div>
+      <div>
+        <h1 className="text-3xl font-bold">{title}</h1>
+        <span className="text-sm font-regular text-slate-500">
+          {formattedLastUpdate}
+        </span>
       </div>
       <SanitizedContent content={content} />
     </div>

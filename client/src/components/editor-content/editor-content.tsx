@@ -13,9 +13,15 @@ type Props = {
   content?: string
   hasError?: boolean
   editorRef: React.MutableRefObject<{ getContent: () => string } | null>
+  onChange?: (value: string) => void
 }
 
-export function EditorContent({ content, hasError, editorRef }: Props) {
+export function EditorContent({
+  content,
+  hasError,
+  editorRef,
+  onChange
+}: Props) {
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -34,6 +40,9 @@ export function EditorContent({ content, hasError, editorRef }: Props) {
           'min-h-[20vh]'
         )
       }
+    },
+    onUpdate: ({ editor }) => {
+      onChange?.(editor.getHTML())
     },
     immediatelyRender: typeof window !== 'undefined'
   })
