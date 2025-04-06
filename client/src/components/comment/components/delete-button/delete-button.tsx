@@ -37,7 +37,7 @@ export function DeleteButton({ id, handleDeleteSuccess }: Props) {
       return
     }
 
-    toast.success('Post delete successfully')
+    toast.success('Comment delete successfully')
     handleDeleteSuccess(id)
   }
 

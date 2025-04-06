@@ -28,9 +28,7 @@ export async function updateCommentAPI(id: string, dto: { content: string }) {
 export async function deleteCommentAPI(id: string) {
   const mutation = gql`
     mutation deleteComment($id: ID!) {
-      deleteComment(id: $id, content: $content) {
-        id
-      }
+      deleteComment(id: $id)
     }
   `
 

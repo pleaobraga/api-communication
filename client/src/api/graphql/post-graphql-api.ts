@@ -72,9 +72,7 @@ export async function getPostAPI(id?: string) {
 export async function deletePostAPI(id: string) {
   const mutation = gql`
     mutation deletePost($id: ID!) {
-      deletePost(id: $id) {
-        id
-      }
+      deletePost(id: $id)
     }
   `
 

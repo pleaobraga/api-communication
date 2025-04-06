@@ -17,6 +17,7 @@ type APIImplementation = {
     dto: { id?: string; title?: string; description?: string; content?: string }
   ): Promise<Post>
   getPostAPI(id?: string): Promise<{ posts: Post[] }>
+  deletePostAPI(id: string): Promise<void>
 }
 
 type CommunicationType = 'rest' | 'graphQL'
